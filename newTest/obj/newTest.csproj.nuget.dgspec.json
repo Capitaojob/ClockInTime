@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\newTest.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\newTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\newTest.csproj",
+        "projectName": "newTest",
+        "projectPath": "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\newTest.csproj",
+        "packagesPath": "C:\\Users\\T-Gamer\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\T-Gamer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Npgsql": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

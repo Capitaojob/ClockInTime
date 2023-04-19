@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "qUYk+oMEIyEq6g2gwPfvUexb2v/cCNu3WFpRz9qyMv9A5iCTXh78NopLn8RSONc9RXgnTsi06rEOiup9rFPYhw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\newTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\T-Gamer\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\T-Gamer\\.nuget\\packages\\npgsql\\7.0.2\\npgsql.7.0.2.nupkg.sha512",
+    "C:\\Users\\T-Gamer\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
