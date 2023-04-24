@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             MiddlePanel = new Panel();
+            LblForgotPw = new LinkLabel();
             ImgPwEye = new PictureBox();
             TxtLoginWarning = new TextBox();
             loginLogo = new Label();
@@ -46,6 +47,7 @@
             MiddlePanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MiddlePanel.BackColor = Color.FromArgb(219, 231, 245);
             MiddlePanel.BackgroundImageLayout = ImageLayout.None;
+            MiddlePanel.Controls.Add(LblForgotPw);
             MiddlePanel.Controls.Add(ImgPwEye);
             MiddlePanel.Controls.Add(TxtLoginWarning);
             MiddlePanel.Controls.Add(loginLogo);
@@ -58,6 +60,22 @@
             MiddlePanel.Name = "MiddlePanel";
             MiddlePanel.Size = new Size(1099, 522);
             MiddlePanel.TabIndex = 0;
+            // 
+            // LblForgotPw
+            // 
+            LblForgotPw.ActiveLinkColor = SystemColors.HotTrack;
+            LblForgotPw.AutoSize = true;
+            LblForgotPw.Font = new Font("Neon 80s", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            LblForgotPw.LinkColor = SystemColors.ControlDarkDark;
+            LblForgotPw.Location = new Point(434, 456);
+            LblForgotPw.Name = "LblForgotPw";
+            LblForgotPw.Size = new Size(247, 16);
+            LblForgotPw.TabIndex = 8;
+            LblForgotPw.TabStop = true;
+            LblForgotPw.Text = "Esqueceu sua senha? Redefina-a";
+            LblForgotPw.TextAlign = ContentAlignment.MiddleCenter;
+            LblForgotPw.VisitedLinkColor = SystemColors.ControlDarkDark;
+            LblForgotPw.LinkClicked += LblForgotPw_LinkClicked;
             // 
             // ImgPwEye
             // 
@@ -77,11 +95,11 @@
             // 
             TxtLoginWarning.BorderStyle = BorderStyle.None;
             TxtLoginWarning.Enabled = false;
-            TxtLoginWarning.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtLoginWarning.Font = new Font("Neon 80s", 14F, FontStyle.Regular, GraphicsUnit.Point);
             TxtLoginWarning.ForeColor = Color.Red;
-            TxtLoginWarning.Location = new Point(359, 464);
+            TxtLoginWarning.Location = new Point(359, 485);
             TxtLoginWarning.Name = "TxtLoginWarning";
-            TxtLoginWarning.Size = new Size(390, 25);
+            TxtLoginWarning.Size = new Size(390, 22);
             TxtLoginWarning.TabIndex = 6;
             TxtLoginWarning.TextAlign = HorizontalAlignment.Center;
             // 
@@ -126,7 +144,7 @@
             pwInput.PasswordChar = '*';
             pwInput.Size = new Size(390, 36);
             pwInput.TabIndex = 3;
-            pwInput.TextChanged += pwInput_TextChanged;
+            pwInput.KeyDown += pwInput_KeyDown;
             // 
             // label1
             // 
@@ -175,7 +193,7 @@
             Controls.Add(MiddlePanel);
             Name = "loginForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Login - SHRIMPLE";
+            Text = "PointPay - Login";
             Load += loginForm_Load;
             MiddlePanel.ResumeLayout(false);
             MiddlePanel.PerformLayout();
@@ -194,5 +212,6 @@
         private Label loginLogo;
         private TextBox TxtLoginWarning;
         private PictureBox ImgPwEye;
+        private LinkLabel LblForgotPw;
     }
 }

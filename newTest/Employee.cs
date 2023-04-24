@@ -1,16 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
 
-namespace newTest
+namespace Workers
 {
-    static class Employee
+    // Classe dos funcionários da empresa
+    public class Employee
     {
-        private static string _name = "";
-        public static string Name
+        private int _id;
+        public int Id
         {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                _id = value;
+            }
+        }
+
+        private string _name = "";
+        public string Name
+        { 
             get
             {
                 return _name;
@@ -21,9 +31,9 @@ namespace newTest
             }
         }
 
-        private static string _email = "";
-        public static string Email 
-        { 
+        private string _email = "";
+        public string Email
+        {
             get
             {
                 return _email;
@@ -34,8 +44,8 @@ namespace newTest
             }
         }
 
-        private static string _cpf = "";
-        public static string CPF
+        private string _cpf = "";
+        public string CPF
         {
             get
             {
@@ -47,8 +57,8 @@ namespace newTest
             }
         }
 
-        private static string _pw = "";
-        public static string Password
+        private string _pw = "";
+        public string Password
         {
             get
             {
@@ -60,8 +70,8 @@ namespace newTest
             }
         }
 
-        private static string _bday = "";
-        public static string Birthday
+        private DateTime _bday;
+        public DateTime Birthday
         {
             get
             {
@@ -73,8 +83,8 @@ namespace newTest
             }
         }
 
-        private static int _role = 0;
-        public static int Role
+        private int _role = 0;
+        public int Role
         {
             get
             {
@@ -83,6 +93,45 @@ namespace newTest
             set
             {
                 _role = value;
+            }
+        }
+
+        private bool _status = true;
+        public bool Status
+        {
+            get {
+                return _status;
+            }
+            set {
+                _status = value;
+            }
+        }
+
+        public static bool Login(string UserEmail, string Password)
+        {
+            string connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            string sql = "SELECT * FROM funcionarios WHERE email = @email AND status = '1'";
+
+            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("email", UserEmail);
+
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read() && Password == reader.GetString(7))
+                        { 
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
             }
         }
     }

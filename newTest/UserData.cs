@@ -3,21 +3,27 @@ using Workers;
 
 namespace newTest
 {
-    public partial class UserInfo : UserControl
+    public partial class UserData : UserControl
     {
-        private Employee User;
+        Employee User = new Employee();
 
-        public UserInfo()
+        public UserData()
         {
             InitializeComponent();
+        }
+
+        private void UserData_Load(object sender, EventArgs e)
+        {
+            UpdateData();
         }
 
         public void UpdateUser(Employee User)
         {
             this.User = User;
+            UpdateData();
         }
 
-        private void UserInfo_Load(object sender, EventArgs e)
+        private void UpdateData()
         {
             LblUserName.Text = User.Name;
             TxtEmail.Text = User.Email;

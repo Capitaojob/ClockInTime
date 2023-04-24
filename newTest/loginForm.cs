@@ -1,6 +1,6 @@
-using Microsoft.VisualBasic;
-using newTest;
-using Npgsql;
+using Microsoft.VisualBasic.ApplicationServices;
+using Workers;
+using Workers.dao;
 
 namespace newTest
 {
@@ -29,32 +29,6 @@ namespace newTest
             loginBtn.Size = new Size(390, 60);
         }
 
-        private void pwInput_TextChanged(object sender, EventArgs e)
-        {
-            if (pwInput.Text != "")
-            {
-                int PassScore = 0;
-
-                foreach (char c in pwInput.Text)
-                {
-                    PassScore += c * 24 % 200;
-                }
-
-                if (PassScore < 800)
-                {
-                    TxtLoginWarning.Text = "Senha fraca";
-                }
-                else if (pwInput.Text.Contains(' '))
-                {
-                    TxtLoginWarning.Text = "Senha não pode conter espaço";
-                }
-                else
-                {
-                    TxtLoginWarning.Text = "";
-                }
-            }
-        }
-
         private void ImgPwEye_Click(object sender, EventArgs e)
         {
             if (pwInput.PasswordChar == '*')
@@ -75,34 +49,48 @@ namespace newTest
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            using NpgsqlConnection conn = new NpgsqlConnection("Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=TzRH");
-            conn.Open();
+            LoginClick();
+        }
 
-            NpgsqlCommand cmd = new NpgsqlCommand($"SELECT * FROM funcionarios WHERE email = '{loginInput.Text}' AND status = '1'", conn);
-            NpgsqlDataReader dr = cmd.ExecuteReader();
-
-            if (dr.Read() && loginInput.Text == dr.GetString(2) && pwInput.Text == dr.GetString(7))
+        private void pwInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                Employee.Name = dr.GetString(1);
-                Employee.Email = dr.GetString(2);
-                Employee.CPF = dr.GetString(3);
-                Employee.Birthday = (dr.GetDateTime(4)).ToString();
-                Employee.Role = dr.GetInt32(5);
-                Employee.Password = dr.GetString(7);
-
-                TxtLoginWarning.Text = "Entrando...";
-                this.Hide();
-                MainForm newMainForm = new();
-                newMainForm.Closed += (s, args) => this.Close();
-                newMainForm.Show();
+                LoginClick();
             }
-            else
+        }
+
+        private void LoginClick()
+        {
+            if (loginInput.Text != "" && pwInput.Text != "")
             {
-                TxtLoginWarning.Text = "Login inválido!";
-                pwInput.Text = "";
-            }
+                EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
+                Employee User = psql.SelectSpecific(loginInput.Text);
 
-            dr.Close();
+                if (User != null && Employee.Login(loginInput.Text, HashUtils.HashString(pwInput.Text)))
+                {
+                    TxtLoginWarning.Text = "Entrando...";
+                    this.Hide();
+
+                    MainForm newMainForm = new MainForm(User);
+                    newMainForm.Closed += (s, args) => this.Close();
+                    newMainForm.Show();
+                }
+                else
+                {
+                    TxtLoginWarning.Text = "Login inválido!";
+                    pwInput.Text = "";
+                }
+            }
+        }
+
+        private void LblForgotPw_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+
+            ForgotPassword newForgotPassword = new ForgotPassword();
+            newForgotPassword.Closed += (s, args) => this.Close();
+            newForgotPassword.Show();
         }
     }
 }

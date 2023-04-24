@@ -89,7 +89,6 @@
             TxtPw.PasswordChar = '*';
             TxtPw.Size = new Size(663, 28);
             TxtPw.TabIndex = 4;
-            TxtPw.Text = "senha";
             // 
             // LblPw
             // 
