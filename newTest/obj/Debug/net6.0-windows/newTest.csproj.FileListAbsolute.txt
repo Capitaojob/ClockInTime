@@ -10,9 +10,7 @@ C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.loginForm.resources
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.MainForm.resources
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.Properties.Resources.resources
-C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.PunchIn.resources
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.RegisterEmployee.resources
-C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.UserInfo.resources
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.csproj.GenerateResource.cache
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.AssemblyInfoInputs.cache

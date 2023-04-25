@@ -16,7 +16,7 @@ namespace PunchIn.dao
     {
         private readonly string connString;
         private const string SQL_INSERT = "INSERT INTO pontos (id_funcionario, data, entrada, saida_al, entrada_al, saida) values (@idEmployee, @date, @entry, @lunchExit, @lunchEntry, @exit)";
-        private const string SQL_READALL = "SELECT * FROM pontos WHERE id_funcionario = @idEmployee ORDER BY id_ponto LIMIT 3";
+        private const string SQL_READALL = "SELECT * FROM pontos WHERE id_funcionario = @idEmployee ORDER BY data DESC LIMIT 3";
         private const string SQL_SELECT = "SELECT * FROM pontos WHERE data = @date AND id_funcionario = @idEmployee"; 
         private const string SQL_UPDATE = "UPDATE pontos SET id_funcionario = @idEmployee, data = @date, entrada = @entry, saida_al = @lunchExit, entrada_al= @lunchEntry, saida = @exit WHERE id_ponto = @id";
         private const string SQL_DELETE = "DELETE FROM pontos WHERE id_ponto = @id";

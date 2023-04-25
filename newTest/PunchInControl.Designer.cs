@@ -40,6 +40,9 @@
             LblMainIn = new Label();
             LblUserId = new Label();
             LblLastRegisters = new Label();
+            LblLastRegister = new Label();
+            LblWarningPonto = new Label();
+            TxtLastClockIn = new TextBox();
             PnlRight.SuspendLayout();
             SuspendLayout();
             // 
@@ -171,10 +174,45 @@
             LblLastRegisters.TabIndex = 0;
             LblLastRegisters.Text = "Últimos Pontos";
             // 
+            // LblLastRegister
+            // 
+            LblLastRegister.AutoSize = true;
+            LblLastRegister.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            LblLastRegister.Location = new Point(193, 201);
+            LblLastRegister.Name = "LblLastRegister";
+            LblLastRegister.Size = new Size(283, 25);
+            LblLastRegister.TabIndex = 7;
+            LblLastRegister.Text = "Último Ponto Registrado:";
+            // 
+            // LblWarningPonto
+            // 
+            LblWarningPonto.AutoSize = true;
+            LblWarningPonto.Font = new Font("Neon 80s", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            LblWarningPonto.Location = new Point(205, 442);
+            LblWarningPonto.Name = "LblWarningPonto";
+            LblWarningPonto.Size = new Size(0, 19);
+            LblWarningPonto.TabIndex = 9;
+            LblWarningPonto.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // TxtLastClockIn
+            // 
+            TxtLastClockIn.BorderStyle = BorderStyle.None;
+            TxtLastClockIn.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtLastClockIn.Location = new Point(3, 240);
+            TxtLastClockIn.Name = "TxtLastClockIn";
+            TxtLastClockIn.ReadOnly = true;
+            TxtLastClockIn.Size = new Size(651, 28);
+            TxtLastClockIn.TabIndex = 10;
+            TxtLastClockIn.TabStop = false;
+            TxtLastClockIn.TextAlign = HorizontalAlignment.Center;
+            // 
             // PunchInControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(TxtLastClockIn);
+            Controls.Add(LblWarningPonto);
+            Controls.Add(LblLastRegister);
             Controls.Add(LblPageName);
             Controls.Add(lblCurrentTime);
             Controls.Add(BtnPunchIn);
@@ -202,5 +240,8 @@
         private Label LblMainIn;
         private Label LblUserId;
         private Label LblLastRegisters;
+        private Label LblLastRegister;
+        private Label LblWarningPonto;
+        private TextBox TxtLastClockIn;
     }
 }

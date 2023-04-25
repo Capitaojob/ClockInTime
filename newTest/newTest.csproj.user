@@ -10,9 +10,6 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PunchIn.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="PunchInControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -20,9 +17,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserData.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="UserInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
