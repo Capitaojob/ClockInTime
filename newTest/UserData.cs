@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using Workers;
+using Workers.dao;
 
 namespace newTest
 {
@@ -31,20 +32,11 @@ namespace newTest
             SelectUserRole();
         }
 
-        async private void SelectUserRole()
+        private void SelectUserRole()
         {
-            using NpgsqlConnection conn = new("Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh");
-            conn.Open();
+            EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
 
-            NpgsqlCommand cmd = new($"SELECT nome_cargo FROM cargo JOIN funcionarios ON funcionarios.cargo = cargo.id_cargo WHERE email = '" + User.Email + "'", conn);
-            NpgsqlDataReader dr = await cmd.ExecuteReaderAsync();
-
-            if (await dr.ReadAsync())
-            {
-                TxtRole.Text = dr.GetString(0);
-            }
-
-            dr.Close();
+            TxtRole.Text = psql.SelectRole(User.Id);
         }
 
         private void BtnUpdatePw_Click(object sender, EventArgs e)

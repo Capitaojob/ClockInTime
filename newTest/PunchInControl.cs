@@ -1,10 +1,7 @@
 ﻿using PunchIn.dao;
 using PunchIn;
-using System;
 using System.Timers;
 using Workers;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.Devices;
 
 namespace newTest
 {
@@ -126,28 +123,32 @@ namespace newTest
             PunchInDaoPostgres psql = new PunchInDaoPostgres();
             List<ClockIn> clockList = psql.ReadAll(User.Id);
 
-            if (clockList != null)
+            if (clockList == null || clockList.Count == 0)
             {
-                foreach (ClockIn clock in clockList)
-                {
-                    string Date = clock.Date.ToString("dd/MM/yyyy");
 
-                    if (clock.MainClockOut != null)
-                    {
-                        AddClockInLabel(Date, clock.MainClockOut.ToString());
-                    }
-                    if (clock.LunchClockIn != null)
-                    {
-                        AddClockInLabel(Date, clock.LunchClockIn.ToString());
-                    }
-                    if (clock.LunchClockOut != null)
-                    {
-                        AddClockInLabel(Date, clock.LunchClockOut.ToString());
-                    }
-                    if (clock.MainClockIn != null)
-                    {
-                        AddClockInLabel(Date, clock.MainClockIn.ToString());
-                    }
+                TxtLastClockIn.Text = "Sem pontos registrados hoje!";
+                return;
+            }
+
+            foreach (ClockIn clock in clockList)
+            {
+                string Date = clock.Date.ToString("dd/MM/yyyy");
+
+                if (clock.MainClockOut != null)
+                {
+                    AddClockInLabel(Date, clock.MainClockOut.ToString());
+                }
+                if (clock.LunchClockIn != null)
+                {
+                    AddClockInLabel(Date, clock.LunchClockIn.ToString());
+                }
+                if (clock.LunchClockOut != null)
+                {
+                    AddClockInLabel(Date, clock.LunchClockOut.ToString());
+                }
+                if (clock.MainClockIn != null)
+                {
+                    AddClockInLabel(Date, clock.MainClockIn.ToString());
                 }
             }
 

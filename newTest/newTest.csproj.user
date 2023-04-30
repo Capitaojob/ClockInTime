@@ -16,7 +16,13 @@
     <Compile Update="RegisterEmployee.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="RoleManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserPayroll.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

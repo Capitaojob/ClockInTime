@@ -1,4 +1,6 @@
 ﻿using Workers;
+using Workers.dao;
+using System.Net.Http;
 
 namespace newTest
 {
@@ -34,6 +36,7 @@ namespace newTest
             BtnRole.BackColor = DefaultColors.LightBlue;
             BtnSignIn.BackColor = DefaultColors.LightBlue;
             BtnGeneralPayment.BackColor = DefaultColors.LightBlue;
+            BtnManageUsers.BackColor = DefaultColors.LightBlue;
 
             BtnClockIn.FlatAppearance.BorderColor = DefaultColors.LightBlue;
             BtnConference.FlatAppearance.BorderColor = DefaultColors.LightBlue;
@@ -41,13 +44,16 @@ namespace newTest
             BtnRole.FlatAppearance.BorderColor = DefaultColors.LightBlue;
             BtnSignIn.FlatAppearance.BorderColor = DefaultColors.LightBlue;
             BtnGeneralPayment.FlatAppearance.BorderColor = DefaultColors.LightBlue;
+            BtnManageUsers.FlatAppearance.BorderColor = DefaultColors.LightBlue;
 
-            if (User.Role != 3)
+            EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
+            if (!psql.SelectHrRole(User.Role))
             {
                 LblManagement.Visible = false;
                 BtnSignIn.Visible = false;
                 BtnRole.Visible = false;
                 BtnGeneralPayment.Visible = false;
+                BtnManageUsers.Visible = false;
             }
 
             ShowMainInfo();
@@ -56,7 +62,7 @@ namespace newTest
         // Side Buttons
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
-            LblPath.Text = "Início > Registrar Funcionário";
+            LblPath.Text = "Início > Cadastrar Funcionário";
             HideAll();
             registerEmployee.Show();
 
@@ -67,6 +73,13 @@ namespace newTest
             LblPath.Text = "Início > Registro de Ponto";
             HideAll();
             punchInControl1.Show();
+        }
+
+        private void BtnPayment_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Demonstrativo de Pagamento";
+            HideAll();
+            userPayroll1.Show();
         }
 
         private void PnlUserInfo_Click(object sender, EventArgs e)
@@ -89,6 +102,7 @@ namespace newTest
         {
             punchInControl1.Hide();
             registerEmployee.Hide();
+            userPayroll1.Hide();
         }
 
         private void userData1_Load(object sender, EventArgs e)
@@ -99,6 +113,16 @@ namespace newTest
         private void punchInControl1_Load(object sender, EventArgs e)
         {
             punchInControl1.UpdateUser(User);
+        }
+
+        private void registerEmployee_Load(object sender, EventArgs e)
+        {
+            registerEmployee.UpdateUser(User);
+        }
+
+        private void userPayroll1_Load(object sender, EventArgs e)
+        {
+            userPayroll1.UpdateUser(User);
         }
     }
 }

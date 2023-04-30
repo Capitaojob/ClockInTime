@@ -7,12 +7,12 @@ namespace PunchIn.dao
     internal interface IPunchInDao
     {
         void Insert(ClockIn clockIn);
-        List<ClockIn> ReadAll();
+        List<ClockIn> ReadAll(int Id);
         void Update(ClockIn clockIn);
         void Delete(ClockIn clockIn);
     }
 
-    public class PunchInDaoPostgres //: IPunchInDao
+    public class PunchInDaoPostgres : IPunchInDao
     {
         private readonly string connString;
         private const string SQL_INSERT = "INSERT INTO pontos (id_funcionario, data, entrada, saida_al, entrada_al, saida) values (@idEmployee, @date, @entry, @lunchExit, @lunchEntry, @exit)";

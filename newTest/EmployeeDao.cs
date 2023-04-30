@@ -9,6 +9,7 @@ namespace Workers.dao
         List<Employee> ReadAll();
         void Update (Employee employee);
         void Delete (Employee employee);
+        int SelectNextId();
     }
 
     public class EmployeeDaoPostgres : IEmployeeDao
@@ -18,8 +19,12 @@ namespace Workers.dao
         private const string SQL_READALL = "SELECT * FROM funcionarios";
         private const string SQL_SELECT = "SELECT * FROM funcionarios WHERE email = @email";
         private const string SQL_UPDATE = "UPDATE funcionarios SET nome = @name, email = @email, cpf = @cpf, nascimento = @birthday, cargo = @role, status = @status, senha = @password WHERE id = @id";
+        private const string SQL_HRROLE = "SELECT * FROM cargo WHERE id_cargo = @id AND dp = true";
+        private const string SQL_SELECTROLE = "SELECT nome_cargo FROM cargo JOIN funcionarios ON funcionarios.cargo = cargo.id_cargo WHERE id = @id";
         private const string SQL_DELETE = "DELETE FROM funcionarios WHERE id = @id";
-        
+        private const string SQL_NEXTVAL = "SELECT id FROM funcionarios ORDER BY id DESC LIMIT 1;";
+
+
         public EmployeeDaoPostgres()
         {
             connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
@@ -105,6 +110,60 @@ namespace Workers.dao
                         {
                             return null;
                         }
+                    }
+                }
+            }
+        }
+
+        public int SelectNextId()
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_NEXTVAL, conn))
+                {
+
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read()) return reader.GetInt32(0) + 1;
+                        else return 0;
+                    }
+                }
+            }
+        }
+
+        public bool SelectHrRole(int Id)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_HRROLE, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read() && reader.HasRows) return true;
+                        else return false;
+                    }
+                }
+            }
+        }
+
+        public string SelectRole(int Id)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_SELECTROLE, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read() && reader.HasRows) return reader.GetString(0);
+                        else return "";
                     }
                 }
             }

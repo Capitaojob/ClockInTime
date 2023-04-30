@@ -32,6 +32,7 @@ namespace newTest
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             PnlMainLeft = new Panel();
+            BtnManageUsers = new Button();
             BtnGeneralPayment = new Button();
             LblManagement = new Label();
             LblClockIn = new Label();
@@ -51,6 +52,7 @@ namespace newTest
             LblPath = new Label();
             registerEmployee = new RegisterEmployee();
             PnlMainContent = new Panel();
+            userPayroll1 = new UserPayroll();
             punchInControl1 = new PunchInControl();
             userData1 = new UserData();
             PnlMainLeft.SuspendLayout();
@@ -64,6 +66,7 @@ namespace newTest
             // 
             PnlMainLeft.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             PnlMainLeft.BackColor = SystemColors.HotTrack;
+            PnlMainLeft.Controls.Add(BtnManageUsers);
             PnlMainLeft.Controls.Add(BtnGeneralPayment);
             PnlMainLeft.Controls.Add(LblManagement);
             PnlMainLeft.Controls.Add(LblClockIn);
@@ -78,6 +81,18 @@ namespace newTest
             PnlMainLeft.Name = "PnlMainLeft";
             PnlMainLeft.Size = new Size(221, 620);
             PnlMainLeft.TabIndex = 0;
+            // 
+            // BtnManageUsers
+            // 
+            BtnManageUsers.Cursor = Cursors.Hand;
+            BtnManageUsers.FlatStyle = FlatStyle.Flat;
+            BtnManageUsers.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnManageUsers.Location = new Point(12, 372);
+            BtnManageUsers.Name = "BtnManageUsers";
+            BtnManageUsers.Size = new Size(195, 43);
+            BtnManageUsers.TabIndex = 11;
+            BtnManageUsers.Text = "Gerenciar Funcionários";
+            BtnManageUsers.UseVisualStyleBackColor = true;
             // 
             // BtnGeneralPayment
             // 
@@ -96,7 +111,7 @@ namespace newTest
             LblManagement.AutoSize = true;
             LblManagement.BackColor = Color.Transparent;
             LblManagement.Font = new Font("Neon 80s", 17F, FontStyle.Regular, GraphicsUnit.Point);
-            LblManagement.Location = new Point(12, 398);
+            LblManagement.Location = new Point(12, 345);
             LblManagement.Name = "LblManagement";
             LblManagement.Size = new Size(173, 24);
             LblManagement.TabIndex = 9;
@@ -118,7 +133,7 @@ namespace newTest
             LblPayment.AutoSize = true;
             LblPayment.BackColor = Color.Transparent;
             LblPayment.Font = new Font("Neon 80s", 17F, FontStyle.Regular, GraphicsUnit.Point);
-            LblPayment.Location = new Point(12, 243);
+            LblPayment.Location = new Point(12, 244);
             LblPayment.Name = "LblPayment";
             LblPayment.Size = new Size(130, 24);
             LblPayment.TabIndex = 5;
@@ -129,11 +144,11 @@ namespace newTest
             BtnSignIn.Cursor = Cursors.Hand;
             BtnSignIn.FlatStyle = FlatStyle.Flat;
             BtnSignIn.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnSignIn.Location = new Point(12, 425);
+            BtnSignIn.Location = new Point(12, 436);
             BtnSignIn.Name = "BtnSignIn";
             BtnSignIn.Size = new Size(195, 43);
             BtnSignIn.TabIndex = 7;
-            BtnSignIn.Text = "Cadastro de Funcionário";
+            BtnSignIn.Text = "Cadastrar Funcionário";
             BtnSignIn.UseVisualStyleBackColor = true;
             BtnSignIn.Click += BtnSignIn_Click;
             // 
@@ -142,11 +157,11 @@ namespace newTest
             BtnRole.Cursor = Cursors.Hand;
             BtnRole.FlatStyle = FlatStyle.Flat;
             BtnRole.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnRole.Location = new Point(12, 494);
+            BtnRole.Location = new Point(12, 501);
             BtnRole.Name = "BtnRole";
             BtnRole.Size = new Size(195, 43);
             BtnRole.TabIndex = 6;
-            BtnRole.Text = "Cadastro de Cargos";
+            BtnRole.Text = "Gerenciar Cargos (add/upd)";
             BtnRole.UseVisualStyleBackColor = true;
             // 
             // BtnConference
@@ -155,7 +170,7 @@ namespace newTest
             BtnConference.Cursor = Cursors.Hand;
             BtnConference.FlatStyle = FlatStyle.Flat;
             BtnConference.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnConference.Location = new Point(12, 180);
+            BtnConference.Location = new Point(12, 174);
             BtnConference.Name = "BtnConference";
             BtnConference.Size = new Size(195, 43);
             BtnConference.TabIndex = 4;
@@ -167,12 +182,13 @@ namespace newTest
             BtnPayment.Cursor = Cursors.Hand;
             BtnPayment.FlatStyle = FlatStyle.Flat;
             BtnPayment.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnPayment.Location = new Point(12, 270);
+            BtnPayment.Location = new Point(12, 271);
             BtnPayment.Name = "BtnPayment";
             BtnPayment.Size = new Size(195, 43);
             BtnPayment.TabIndex = 3;
             BtnPayment.Text = "Demonstrativo de Pagamento";
             BtnPayment.UseVisualStyleBackColor = true;
+            BtnPayment.Click += BtnPayment_Click;
             // 
             // BtnClockIn
             // 
@@ -286,10 +302,12 @@ namespace newTest
             registerEmployee.Name = "registerEmployee";
             registerEmployee.Size = new Size(914, 482);
             registerEmployee.TabIndex = 5;
+            registerEmployee.Load += registerEmployee_Load;
             // 
             // PnlMainContent
             // 
             PnlMainContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PnlMainContent.Controls.Add(userPayroll1);
             PnlMainContent.Controls.Add(punchInControl1);
             PnlMainContent.Controls.Add(registerEmployee);
             PnlMainContent.Controls.Add(userData1);
@@ -297,6 +315,15 @@ namespace newTest
             PnlMainContent.Name = "PnlMainContent";
             PnlMainContent.Size = new Size(914, 482);
             PnlMainContent.TabIndex = 1;
+            // 
+            // userPayroll1
+            // 
+            userPayroll1.BackColor = Color.FromArgb(248, 250, 255);
+            userPayroll1.Location = new Point(0, 0);
+            userPayroll1.Name = "userPayroll1";
+            userPayroll1.Size = new Size(914, 482);
+            userPayroll1.TabIndex = 7;
+            userPayroll1.Load += userPayroll1_Load;
             // 
             // punchInControl1
             // 
@@ -369,5 +396,7 @@ namespace newTest
         private Panel PnlMainContent;
         private UserData userData1;
         private PunchInControl punchInControl1;
+        private Button BtnManageUsers;
+        private UserPayroll userPayroll1;
     }
 }
