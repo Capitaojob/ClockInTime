@@ -117,6 +117,7 @@ namespace newTest
                 table.WidthPercentage = 100;
                 table.SetWidths(new float[] { 0.6f, 0.2f, 0.2f });
                 table.HorizontalAlignment = Element.ALIGN_CENTER;
+                table.SpacingAfter = 10;
                 titles = new string[3] {"Nome", "CPF", "Cargo" }; //"Email", , "Cargo", "Salário"
 
                 for (int i = 0; i < 3; i++)
@@ -135,6 +136,56 @@ namespace newTest
                 EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
                 cells = new PdfPCell(new Phrase(Epsql.SelectRole(User.Id)));
                 cells.Border = PdfPCell.BOTTOM_BORDER | PdfPCell.LEFT_BORDER | PdfPCell.RIGHT_BORDER;
+                table.AddCell(cells);
+
+                pdf.Add(table);
+
+                table.SpacingAfter = 0;
+
+                // Payment
+                table = new PdfPTable(5);
+                table.WidthPercentage = 100;
+                table.SetWidths(new float[] { 0.1f, 0.34f, 0.16f, 0.2f, 0.2f });
+                table.HorizontalAlignment = Element.ALIGN_CENTER;
+                titles = new string[5] { "Cód", "Descrição", "Referência", "Proventos", "Descontos" };
+
+                for (int i = 0; i < 5; i++)
+                {
+                    PdfPCell headerCell = new PdfPCell(new Phrase(titles[i]));
+                    table.AddCell(headerCell);
+                }
+
+                cells = new PdfPCell(new Phrase("001"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("Salario Base"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("Horas"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("Salario Bruto"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("Descontos"));
+                table.AddCell(cells);
+
+                cells = new PdfPCell(new Phrase("020"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("INSS"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("%"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase(""));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("Descontos"));
+                table.AddCell(cells);
+
+                cells = new PdfPCell(new Phrase("033"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("IRFF"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("%"));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase(""));
+                table.AddCell(cells);
+                cells = new PdfPCell(new Phrase("Descontos"));
                 table.AddCell(cells);
 
                 pdf.Add(table);

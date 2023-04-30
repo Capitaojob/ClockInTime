@@ -104,9 +104,9 @@
             CbHR.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
             CbHR.Location = new Point(554, 270);
             CbHR.Name = "CbHR";
-            CbHR.Size = new Size(303, 29);
+            CbHR.Size = new Size(217, 29);
             CbHR.TabIndex = 25;
-            CbHR.Text = "É de recursos humanos?";
+            CbHR.Text = "Gerencia dados?";
             CbHR.UseVisualStyleBackColor = true;
             // 
             // RoleManagement

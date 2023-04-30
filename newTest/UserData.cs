@@ -34,9 +34,9 @@ namespace newTest
 
         private void SelectUserRole()
         {
-            EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
+            EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
 
-            TxtRole.Text = psql.SelectRole(User.Id);
+            TxtRole.Text = Epsql.SelectRole(User.Id);
         }
 
         private void BtnUpdatePw_Click(object sender, EventArgs e)
