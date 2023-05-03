@@ -1,6 +1,5 @@
-﻿using Npgsql;
-using System.Data;
-using Workers;
+﻿using newTest;
+using Npgsql;
 
 namespace PunchIn.dao
 {
@@ -23,7 +22,7 @@ namespace PunchIn.dao
 
         public PunchInDaoPostgres()
         {
-            connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            connString = DbConnection.connString;
         }
 
         public void Insert(ClockIn clockIn)
@@ -110,15 +109,20 @@ namespace PunchIn.dao
             return clockIn;
         }
 
-        public ClockIn? SelectSpecific(int idEmployee)
+        public ClockIn? SelectSpecific(int idEmployee, DateTime? date = null)
         {
+            if (date == null)
+            {
+                date = DateTime.Now.Date;
+            }
+
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_SELECT, conn))
                 {
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now.Date); //.ToString("yyyy-MM-dd")
+                    cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@idEmployee", idEmployee);
 
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())

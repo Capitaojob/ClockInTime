@@ -1,4 +1,5 @@
 ﻿using Location;
+using newTest;
 using Npgsql;
 
 namespace Roles.Dao
@@ -17,12 +18,27 @@ namespace Roles.Dao
         private const string SQL_INSERT = "INSERT INTO endereco (id_func_end, cep, rua, numero, bairro, complemento, cidade, estado) VALUES (@id, @cep, @street, @number, @neighbourhood, @suplement, @city, @state)";
         private const string SQL_READALL = "SELECT * FROM funcionarios";
         private const string SQL_SELECT = "SELECT * FROM cargo WHERE id_cargo = @RoleId";
+        private const string SQL_INSS = @"SELECT DISTINCT
+                                        cargo.nome_cargo,
+                                        CASE 
+                                        WHEN cargo.salario <= (SELECT salario_max FROM dados_impostos WHERE id = 1 AND id_imposto = 1) THEN 
+                                        (SELECT porcentagem FROM dados_impostos WHERE id = 1 AND id_imposto = 1) 
+                                        WHEN cargo.salario <= (SELECT salario_max FROM dados_impostos WHERE id = 2 AND id_imposto = 1) AND cargo.salario > (SELECT salario_max FROM dados_impostos WHERE id = 1 AND id_imposto = 1) THEN 
+                                        (SELECT porcentagem FROM dados_impostos WHERE id = 2 AND id_imposto = 1) 
+                                        WHEN cargo.salario <= (SELECT salario_max FROM dados_impostos WHERE id = 3 AND id_imposto = 1) AND cargo.salario > (SELECT salario_max FROM dados_impostos WHERE id = 2 AND id_imposto = 1) THEN 
+                                        (SELECT porcentagem FROM dados_impostos WHERE id = 3 AND id_imposto = 1)  
+                                        ELSE 
+                                        (SELECT porcentagem FROM dados_impostos WHERE id = 4 AND id_imposto = 1) 
+                                        END AS inss
+                                        FROM cargo, dados_impostos
+                                        WHERE cargo.id_cargo = @id AND dados_impostos.id_imposto = 1";
+
         private const string SQL_UPDATE = "UPDATE funcionarios SET nome = @name, email = @email, cpf = @cpf, nascimento = @birthday, cargo = @role, status = @status, senha = @password WHERE id = @id";
         private const string SQL_DELETE = "DELETE FROM funcionarios WHERE id = @id";
 
         public RoleDaoPostgres()
         {
-            connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            connString = DbConnection.connString;
         }
 
         public void Insert(Role role)
@@ -95,12 +111,38 @@ namespace Roles.Dao
                             role.Name = reader.GetString(1);
                             role.Wage = reader.GetDecimal(2);
                             role.Dp = reader.GetBoolean(3);
+                            role.Hours = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
 
                             return role;
                         }
                         else
                         {
                             return null;
+                        }
+                    }
+                }
+            }
+        }
+
+        public decimal SelectINSS(int Id)
+        {
+            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_INSS, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader.GetDecimal(1);
+                        }
+                        else
+                        {
+                            return 0;
                         }
                     }
                 }

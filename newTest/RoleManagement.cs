@@ -22,7 +22,7 @@ namespace newTest
 
         private void QueryRoles()
         {
-            string connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            string connString = DbConnection.connString;
             string sql = "SELECT id_cargo, nome_cargo FROM cargo;";
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))

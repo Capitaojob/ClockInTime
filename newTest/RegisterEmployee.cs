@@ -202,7 +202,7 @@ namespace newTest
 
         private void QueryRoles()
         {
-            string connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            string connString = DbConnection.connString;
             string sql = "SELECT id_cargo, nome_cargo FROM cargo;";
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
@@ -340,7 +340,7 @@ namespace newTest
                 {
                     try
                     {
-                        string connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+                        string connString = DbConnection.connString;
                         string SQL_INSERT = "INSERT INTO funcionarios (nome, email, cpf, nascimento, cargo, status, senha) VALUES (@name, @email, @cpf, @birthday, @role, '1', @password)";
 
                         using (NpgsqlConnection conn = new NpgsqlConnection(connString))

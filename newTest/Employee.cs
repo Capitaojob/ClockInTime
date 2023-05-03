@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using newTest;
+using Npgsql;
 
 namespace Workers
 {
@@ -109,7 +110,7 @@ namespace Workers
 
         public static bool Login(string UserEmail, string Password)
         {
-            string connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            string connString = DbConnection.connString;
             string sql = "SELECT * FROM funcionarios WHERE email = @email AND status = '1'";
 
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))

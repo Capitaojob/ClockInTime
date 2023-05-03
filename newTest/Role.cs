@@ -28,6 +28,19 @@
             }
         }
 
+        private int _hours = 0;
+        public int Hours
+        {
+            get
+            {
+                return _hours;
+            }
+            set
+            {
+                _hours = value;
+            }
+        }
+
         private decimal _wage = 0;
         public decimal Wage
         {

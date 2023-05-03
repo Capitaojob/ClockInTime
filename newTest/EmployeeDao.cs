@@ -27,7 +27,7 @@ namespace Workers.dao
 
         public EmployeeDaoPostgres()
         {
-            connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            connString = DbConnection.connString;
         }
 
         public void Insert(Employee employee)

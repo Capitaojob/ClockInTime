@@ -82,6 +82,7 @@
             // 
             // BtnGeneratePayroll
             // 
+            BtnGeneratePayroll.Cursor = Cursors.Hand;
             BtnGeneratePayroll.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
             BtnGeneratePayroll.Location = new Point(36, 402);
             BtnGeneratePayroll.Name = "BtnGeneratePayroll";

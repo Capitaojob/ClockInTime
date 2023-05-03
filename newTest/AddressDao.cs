@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using newTest;
+using Npgsql;
 
 namespace Location.dao
 {
@@ -21,7 +22,7 @@ namespace Location.dao
 
         public AddressDaoPostgres()
         {
-            connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            connString = DbConnection.connString;
         }
 
         public void Insert(Address address)
