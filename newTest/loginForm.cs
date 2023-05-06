@@ -13,6 +13,10 @@ namespace newTest
 
         private void loginForm_Load(object sender, EventArgs e)
         {
+            this.BackColor = DefaultColors.DarkBlue;
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             ImgPwEye.BackColor = DefaultColors.InputGray;
 
             MiddlePanel.BackColor = DefaultColors.White;
@@ -65,7 +69,7 @@ namespace newTest
             if (loginInput.Text != "" && pwInput.Text != "")
             {
                 EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
-                Employee User = psql.SelectSpecific(loginInput.Text);
+                Employee? User = psql.SelectSpecific(loginInput.Text);
 
                 if (User != null && Employee.Login(loginInput.Text, HashUtils.HashString(pwInput.Text)))
                 {

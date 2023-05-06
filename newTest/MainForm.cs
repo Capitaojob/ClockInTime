@@ -1,4 +1,5 @@
 ﻿using Workers;
+using Workers.dao;
 
 namespace newTest
 {
@@ -16,6 +17,8 @@ namespace newTest
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.BackColor = DefaultColors.InputGray;
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             PnlMainLeft.BackColor = DefaultColors.DarkBlue;
             PnlDivider.BackColor = DefaultColors.Gray;
             LblLogoTop.BackColor = DefaultColors.DarkBlue;
@@ -34,6 +37,7 @@ namespace newTest
             BtnRole.BackColor = DefaultColors.LightBlue;
             BtnSignIn.BackColor = DefaultColors.LightBlue;
             BtnGeneralPayment.BackColor = DefaultColors.LightBlue;
+            BtnManageUsers.BackColor = DefaultColors.LightBlue;
 
             BtnClockIn.FlatAppearance.BorderColor = DefaultColors.LightBlue;
             BtnConference.FlatAppearance.BorderColor = DefaultColors.LightBlue;
@@ -41,13 +45,16 @@ namespace newTest
             BtnRole.FlatAppearance.BorderColor = DefaultColors.LightBlue;
             BtnSignIn.FlatAppearance.BorderColor = DefaultColors.LightBlue;
             BtnGeneralPayment.FlatAppearance.BorderColor = DefaultColors.LightBlue;
+            BtnManageUsers.FlatAppearance.BorderColor = DefaultColors.LightBlue;
 
-            if (User.Role != 3)
+            EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
+            if (!psql.SelectHrRole(User.Role))
             {
                 LblManagement.Visible = false;
                 BtnSignIn.Visible = false;
                 BtnRole.Visible = false;
                 BtnGeneralPayment.Visible = false;
+                BtnManageUsers.Visible = false;
             }
 
             ShowMainInfo();
@@ -56,9 +63,9 @@ namespace newTest
         // Side Buttons
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
-            LblPath.Text = "Início > Registrar Funcionário";
+            LblPath.Text = "Início > Gerenciar Funcionário";
             HideAll();
-            registerEmployee.Show();
+            registerEmployee1.Show();
 
         }
 
@@ -67,6 +74,13 @@ namespace newTest
             LblPath.Text = "Início > Registro de Ponto";
             HideAll();
             punchInControl1.Show();
+        }
+
+        private void BtnPayment_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Demonstrativo de Pagamento";
+            HideAll();
+            userPayroll1.Show();
         }
 
         private void PnlUserInfo_Click(object sender, EventArgs e)
@@ -79,6 +93,13 @@ namespace newTest
             ShowMainInfo();
         }
 
+        private void BtnConference_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Consulta de Pontos";
+            HideAll();
+            punchInViewer1.Show();
+        }
+
         private void ShowMainInfo()
         {
             LblPath.Text = "Início > Minha Conta";
@@ -88,7 +109,10 @@ namespace newTest
         private void HideAll()
         {
             punchInControl1.Hide();
-            registerEmployee.Hide();
+            registerEmployee1.Hide();
+            userPayroll1.Hide();
+            roleManagement1.Hide();
+            punchInViewer1.Hide();
         }
 
         private void userData1_Load(object sender, EventArgs e)
@@ -99,6 +123,28 @@ namespace newTest
         private void punchInControl1_Load(object sender, EventArgs e)
         {
             punchInControl1.UpdateUser(User);
+        }
+
+        private void registerEmployee_Load(object sender, EventArgs e)
+        {
+            registerEmployee1.UpdateUser(User);
+        }
+
+        private void userPayroll1_Load(object sender, EventArgs e)
+        {
+            userPayroll1.UpdateUser(User);
+        }
+
+        private void punchInViewer1_Load(object sender, EventArgs e)
+        {
+            punchInViewer1.UpdateUser(User);
+        }
+
+        private void BtnRole_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Gerenciar Cargos";
+            HideAll();
+            roleManagement1.Show();
         }
     }
 }
