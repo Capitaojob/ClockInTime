@@ -9,14 +9,14 @@ namespace Roles.Dao
         void Insert(Role role);
         List<Role> ReadAll();
         void Update(Role role);
-        void Delete(Role role);
+        void Delete(int Id);
     }
 
     public class RoleDaoPostgres : IRoleDao
     {
         private readonly string connString;
-        private const string SQL_INSERT = "INSERT INTO endereco (id_func_end, cep, rua, numero, bairro, complemento, cidade, estado) VALUES (@id, @cep, @street, @number, @neighbourhood, @suplement, @city, @state)";
-        private const string SQL_READALL = "SELECT * FROM funcionarios";
+        private const string SQL_INSERT = "INSERT INTO cargo (nome_cargo, salario, dp, carga_horaria) VALUES (@name, @wage, @dp, @hours)";
+        private const string SQL_READALL = "SELECT * FROM cargo";
         private const string SQL_SELECT = "SELECT * FROM cargo WHERE id_cargo = @RoleId";
         private const string SQL_INSS = @"SELECT DISTINCT
                                         cargo.nome_cargo,
@@ -31,10 +31,10 @@ namespace Roles.Dao
                                         (SELECT porcentagem FROM dados_impostos WHERE id = 4 AND id_imposto = 1) 
                                         END AS inss
                                         FROM cargo, dados_impostos
-                                        WHERE cargo.id_cargo = @id AND dados_impostos.id_imposto = 1";
+                                        WHERE cargo.id_cargo = @id AND dados_impostos.id_imposto = 1"; // Will Change
 
-        private const string SQL_UPDATE = "UPDATE funcionarios SET nome = @name, email = @email, cpf = @cpf, nascimento = @birthday, cargo = @role, status = @status, senha = @password WHERE id = @id";
-        private const string SQL_DELETE = "DELETE FROM funcionarios WHERE id = @id";
+        private const string SQL_UPDATE = "UPDATE cargo SET nome_cargo = @name, salario = @wage, dp = @dp, carga_horaria = @hours WHERE id_cargo = @id;";
+        private const string SQL_DELETE = "DELETE FROM cargo WHERE id_cargo = @id";
 
         public RoleDaoPostgres()
         {
@@ -49,14 +49,10 @@ namespace Roles.Dao
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_INSERT, conn))
                 {
-                    //cmd.Parameters.AddWithValue("@id", role.Id);
-                    //cmd.Parameters.AddWithValue("@cep", role.CEP);
-                    //cmd.Parameters.AddWithValue("@street", role.Street);
-                    //cmd.Parameters.AddWithValue("@number", role.Number);
-                    //cmd.Parameters.AddWithValue("@neighbourhood", role.Neighbourhood);
-                    //cmd.Parameters.AddWithValue("@suplement", role.Suplement);
-                    //cmd.Parameters.AddWithValue("@city", role.City);
-                    //cmd.Parameters.AddWithValue("@state", role.State);
+                    cmd.Parameters.AddWithValue("@name", role.Name);
+                    cmd.Parameters.AddWithValue("@wage", role.Wage);
+                    cmd.Parameters.AddWithValue("@dp", role.Dp);
+                    cmd.Parameters.AddWithValue("@hours", role.Hours);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -75,14 +71,11 @@ namespace Roles.Dao
                         while (reader.Read())
                         {
                             Role role = new Role();
-                            //employee.Id = (int)reader["id"];
-                            //employee.Name = reader["nome"].ToString();
-                            //employee.Email = reader["email"].ToString();
-                            //employee.CPF = reader["cpf"].ToString();
-                            //employee.Birthday = (DateTime)reader["nascimento"];
-                            //employee.Role = (int)reader["cargo"];
-                            //employee.Status = (bool)reader["status"];
-                            //employee.Password = reader["senha"].ToString();
+                            role.Id = reader.GetInt32(0);
+                            role.Name = reader.GetString(1);
+                            role.Wage = reader.GetDecimal(2);
+                            role.Dp = reader.IsDBNull(3) ? false : reader.GetBoolean(3);
+                            role.Hours = reader.GetInt32(4);
 
                             roles.Add(role);
                         }
@@ -110,7 +103,7 @@ namespace Roles.Dao
                             role.Id = reader.GetInt32(0);
                             role.Name = reader.GetString(1);
                             role.Wage = reader.GetDecimal(2);
-                            role.Dp = reader.GetBoolean(3);
+                            role.Dp = reader.IsDBNull(3) ? false : reader.GetBoolean(3);
                             role.Hours = reader.IsDBNull(4) ? 0 : reader.GetInt32(4);
 
                             return role;
@@ -149,7 +142,7 @@ namespace Roles.Dao
             }
         }
 
-        public void Update(Role address)
+        public void Update(Role role)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
@@ -157,20 +150,17 @@ namespace Roles.Dao
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_UPDATE, conn))
                 {
-                    //cmd.Parameters.AddWithValue("@id", employee.Id);
-                    //cmd.Parameters.AddWithValue("@name", employee.Name.Replace("Æ", "ã").Replace("Ò", "ã"));
-                    //cmd.Parameters.AddWithValue("@email", employee.Email);
-                    //cmd.Parameters.AddWithValue("@cpf", employee.CPF);
-                    //cmd.Parameters.AddWithValue("@birthday", employee.Birthday);
-                    //cmd.Parameters.AddWithValue("@role", employee.Role);
-                    //cmd.Parameters.AddWithValue("@status", employee.Status);
-                    //cmd.Parameters.AddWithValue("@password", HashUtils.HashString(employee.Password));
+                    cmd.Parameters.AddWithValue("id", role.Id);
+                    cmd.Parameters.AddWithValue("@name", role.Name);
+                    cmd.Parameters.AddWithValue("@wage", role.Wage);
+                    cmd.Parameters.AddWithValue("@dp", role.Dp);
+                    cmd.Parameters.AddWithValue("@hours", role.Hours);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public void Delete(Role address)
+        public void Delete(int Id)
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
@@ -178,8 +168,8 @@ namespace Roles.Dao
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_DELETE, conn))
                 {
-                    //cmd.Parameters.AddWithValue("@id", address.Id);
-                    cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@id", Id);
+                cmd.ExecuteNonQuery();
                 }
             }
         }

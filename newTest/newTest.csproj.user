@@ -13,6 +13,9 @@
     <Compile Update="PunchInControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="PunchInViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="RegisterEmployee.cs">
       <SubType>UserControl</SubType>
     </Compile>

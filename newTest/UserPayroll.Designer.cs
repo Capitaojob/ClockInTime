@@ -34,6 +34,8 @@
             LblEnd = new Label();
             BtnGeneratePayroll = new Button();
             PnlLeftInfo = new Panel();
+            LblIntro = new Label();
+            LblWelcome = new Label();
             LblDirectory = new Label();
             BtnFolder = new Button();
             FBD = new FolderBrowserDialog();
@@ -45,7 +47,7 @@
             DtStart.CustomFormat = "  dd/MM/yyyy";
             DtStart.Font = new Font("Dubai", 12F, FontStyle.Regular, GraphicsUnit.Point);
             DtStart.Format = DateTimePickerFormat.Custom;
-            DtStart.Location = new Point(37, 127);
+            DtStart.Location = new Point(346, 78);
             DtStart.Name = "DtStart";
             DtStart.Size = new Size(223, 35);
             DtStart.TabIndex = 0;
@@ -55,7 +57,7 @@
             DtEnd.CustomFormat = "  dd/MM/yyyy";
             DtEnd.Font = new Font("Dubai", 12F, FontStyle.Regular, GraphicsUnit.Point);
             DtEnd.Format = DateTimePickerFormat.Custom;
-            DtEnd.Location = new Point(36, 198);
+            DtEnd.Location = new Point(346, 153);
             DtEnd.Name = "DtEnd";
             DtEnd.Size = new Size(223, 35);
             DtEnd.TabIndex = 1;
@@ -64,7 +66,7 @@
             // 
             LblStart.AutoSize = true;
             LblStart.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblStart.Location = new Point(36, 104);
+            LblStart.Location = new Point(345, 55);
             LblStart.Name = "LblStart";
             LblStart.Size = new Size(57, 21);
             LblStart.TabIndex = 2;
@@ -74,7 +76,7 @@
             // 
             LblEnd.AutoSize = true;
             LblEnd.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblEnd.Location = new Point(36, 174);
+            LblEnd.Location = new Point(346, 129);
             LblEnd.Name = "LblEnd";
             LblEnd.Size = new Size(46, 21);
             LblEnd.TabIndex = 3;
@@ -83,8 +85,9 @@
             // BtnGeneratePayroll
             // 
             BtnGeneratePayroll.Cursor = Cursors.Hand;
+            BtnGeneratePayroll.FlatStyle = FlatStyle.Flat;
             BtnGeneratePayroll.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnGeneratePayroll.Location = new Point(36, 402);
+            BtnGeneratePayroll.Location = new Point(345, 401);
             BtnGeneratePayroll.Name = "BtnGeneratePayroll";
             BtnGeneratePayroll.Size = new Size(224, 46);
             BtnGeneratePayroll.TabIndex = 4;
@@ -94,20 +97,40 @@
             // 
             // PnlLeftInfo
             // 
-            PnlLeftInfo.Controls.Add(LblDirectory);
-            PnlLeftInfo.Controls.Add(LblEnd);
-            PnlLeftInfo.Controls.Add(BtnFolder);
-            PnlLeftInfo.Controls.Add(DtEnd);
+            PnlLeftInfo.Controls.Add(LblIntro);
+            PnlLeftInfo.Controls.Add(LblWelcome);
             PnlLeftInfo.Location = new Point(0, 0);
             PnlLeftInfo.Name = "PnlLeftInfo";
-            PnlLeftInfo.Size = new Size(316, 482);
+            PnlLeftInfo.Size = new Size(300, 482);
             PnlLeftInfo.TabIndex = 5;
+            // 
+            // LblIntro
+            // 
+            LblIntro.AutoSize = true;
+            LblIntro.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            LblIntro.Location = new Point(21, 87);
+            LblIntro.MaximumSize = new Size(270, 0);
+            LblIntro.Name = "LblIntro";
+            LblIntro.Size = new Size(265, 105);
+            LblIntro.TabIndex = 25;
+            LblIntro.Text = "Escolha o período desejado e o diretório para o salvamento e visualize o seu demonstrativo de pagamento!";
+            LblIntro.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // LblWelcome
+            // 
+            LblWelcome.AutoSize = true;
+            LblWelcome.Font = new Font("Neon 80s", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            LblWelcome.Location = new Point(39, 38);
+            LblWelcome.Name = "LblWelcome";
+            LblWelcome.Size = new Size(224, 42);
+            LblWelcome.TabIndex = 24;
+            LblWelcome.Text = "TzSoluções";
             // 
             // LblDirectory
             // 
             LblDirectory.AutoSize = true;
             LblDirectory.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblDirectory.Location = new Point(37, 245);
+            LblDirectory.Location = new Point(346, 252);
             LblDirectory.Name = "LblDirectory";
             LblDirectory.Size = new Size(91, 21);
             LblDirectory.TabIndex = 6;
@@ -116,9 +139,9 @@
             // BtnFolder
             // 
             BtnFolder.Font = new Font("Neon 80s", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnFolder.Location = new Point(36, 269);
+            BtnFolder.Location = new Point(345, 276);
             BtnFolder.Name = "BtnFolder";
-            BtnFolder.Size = new Size(224, 38);
+            BtnFolder.Size = new Size(521, 38);
             BtnFolder.TabIndex = 0;
             BtnFolder.Text = "Selecione o diretório";
             BtnFolder.TextAlign = ContentAlignment.MiddleLeft;
@@ -130,9 +153,13 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(BtnGeneratePayroll);
-            Controls.Add(LblStart);
-            Controls.Add(DtStart);
             Controls.Add(PnlLeftInfo);
+            Controls.Add(LblDirectory);
+            Controls.Add(DtEnd);
+            Controls.Add(LblStart);
+            Controls.Add(BtnFolder);
+            Controls.Add(DtStart);
+            Controls.Add(LblEnd);
             Name = "UserPayroll";
             Size = new Size(914, 482);
             Load += UserPayroll_Load;
@@ -153,5 +180,7 @@
         private FolderBrowserDialog FBD;
         private Button BtnFolder;
         private Label LblDirectory;
+        private Label LblIntro;
+        private Label LblWelcome;
     }
 }

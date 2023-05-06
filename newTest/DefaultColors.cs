@@ -12,6 +12,6 @@
         public static readonly Color Gray = Color.FromArgb(131, 137, 149);
 
         public static readonly Color WarnRed = Color.FromArgb(235, 50, 38);
-        public static readonly Color WarnPink = Color.FromArgb(224, 148, 148);
+        public static readonly Color WarnPink = Color.FromArgb(192, 82, 65); //224, 148, 148
     }                                                                      
 }

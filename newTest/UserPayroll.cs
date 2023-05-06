@@ -4,7 +4,6 @@ using PunchIn;
 using PunchIn.dao;
 using Roles;
 using Roles.Dao;
-using System.Data;
 using System.Diagnostics;
 using Workers;
 using Workers.dao;
@@ -24,11 +23,14 @@ namespace newTest
         {
             this.BackColor = DefaultColors.White;
             //PnlLeftInfo.BackColor = DefaultColors.InputGray;
-            PnlLeftInfo.BorderStyle = BorderStyle.FixedSingle;
+            PnlLeftInfo.BackColor = DefaultColors.DarkBlue;
+
+            LblWelcome.ForeColor = DefaultColors.SandyBrown;
+            LblIntro.ForeColor = DefaultColors.Gray;
 
             BtnGeneratePayroll.BackColor = DefaultColors.SandyBrown;
-            BtnGeneratePayroll.ForeColor = DefaultColors.White;
-            BtnGeneratePayroll.FlatStyle = FlatStyle.Flat;
+            //BtnGeneratePayroll.FlatStyle = FlatStyle.Flat;
+            BtnGeneratePayroll.FlatAppearance.BorderSize = 0;
 
             DtStart.Value = DateTime.Now.AddMonths(-1);
         }
@@ -203,7 +205,7 @@ namespace newTest
                     table.AddCell(cells);
                     totalAddition += hourEffect;
                 }
-                else if (workedHours < role.Hours) 
+                else if (workedHours < role.Hours)
                 {
                     // Dedução
                     cells = new PdfPCell(new Phrase("010"));
@@ -336,8 +338,8 @@ namespace newTest
         private int GetDateHours(DateTime date)
         {
             ClockIn? clockIn = Ppsql.SelectSpecific(User.Id, date.Date);
-            
-            if (clockIn == null || clockIn.MainClockIn == null) 
+
+            if (clockIn == null || clockIn.MainClockIn == null)
             {
                 return 0;
             }

@@ -35,6 +35,12 @@
             label2 = new Label();
             TxtRoleWage = new TextBox();
             CbHR = new CheckBox();
+            BtnSave = new Button();
+            LblHours = new Label();
+            TxtHours = new TextBox();
+            LblWarning = new Label();
+            BtnNew = new Button();
+            BtnDelete = new Button();
             SuspendLayout();
             // 
             // comboBoxRoles
@@ -46,7 +52,7 @@
             comboBoxRoles.Location = new Point(44, 86);
             comboBoxRoles.Name = "comboBoxRoles";
             comboBoxRoles.Size = new Size(294, 33);
-            comboBoxRoles.TabIndex = 17;
+            comboBoxRoles.TabIndex = 30;
             comboBoxRoles.SelectedIndexChanged += comboBoxRoles_SelectedIndexChanged;
             // 
             // LblRole
@@ -63,16 +69,16 @@
             // 
             TxtRoleName.BorderStyle = BorderStyle.FixedSingle;
             TxtRoleName.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            TxtRoleName.Location = new Point(554, 86);
+            TxtRoleName.Location = new Point(574, 86);
             TxtRoleName.Name = "TxtRoleName";
             TxtRoleName.Size = new Size(294, 35);
-            TxtRoleName.TabIndex = 19;
+            TxtRoleName.TabIndex = 31;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Neon 80s", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(554, 61);
+            label1.Location = new Point(574, 61);
             label1.Name = "label1";
             label1.Size = new Size(173, 22);
             label1.TabIndex = 20;
@@ -82,7 +88,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Neon 80s", 16F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(555, 157);
+            label2.Location = new Point(574, 149);
             label2.Name = "label2";
             label2.Size = new Size(79, 22);
             label2.TabIndex = 22;
@@ -92,27 +98,106 @@
             // 
             TxtRoleWage.BorderStyle = BorderStyle.FixedSingle;
             TxtRoleWage.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            TxtRoleWage.Location = new Point(555, 182);
+            TxtRoleWage.Location = new Point(574, 174);
             TxtRoleWage.Name = "TxtRoleWage";
             TxtRoleWage.Size = new Size(293, 35);
-            TxtRoleWage.TabIndex = 21;
+            TxtRoleWage.TabIndex = 32;
+            TxtRoleWage.KeyPress += TxtRoleWage_KeyPress;
             // 
             // CbHR
             // 
             CbHR.AutoSize = true;
             CbHR.Cursor = Cursors.Hand;
             CbHR.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            CbHR.Location = new Point(554, 270);
+            CbHR.Location = new Point(575, 340);
             CbHR.Name = "CbHR";
             CbHR.Size = new Size(217, 29);
-            CbHR.TabIndex = 25;
+            CbHR.TabIndex = 34;
             CbHR.Text = "Gerencia dados?";
             CbHR.UseVisualStyleBackColor = true;
+            // 
+            // BtnSave
+            // 
+            BtnSave.BackgroundImageLayout = ImageLayout.None;
+            BtnSave.Cursor = Cursors.Hand;
+            BtnSave.FlatStyle = FlatStyle.Flat;
+            BtnSave.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnSave.Location = new Point(579, 394);
+            BtnSave.Name = "BtnSave";
+            BtnSave.Size = new Size(289, 39);
+            BtnSave.TabIndex = 35;
+            BtnSave.Text = "Salvar Alterações";
+            BtnSave.UseVisualStyleBackColor = true;
+            BtnSave.Click += BtnSave_Click;
+            // 
+            // LblHours
+            // 
+            LblHours.AutoSize = true;
+            LblHours.Font = new Font("Neon 80s", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            LblHours.Location = new Point(574, 244);
+            LblHours.Name = "LblHours";
+            LblHours.Size = new Size(230, 22);
+            LblHours.TabIndex = 28;
+            LblHours.Text = "Carga Horária Mensal";
+            // 
+            // TxtHours
+            // 
+            TxtHours.BorderStyle = BorderStyle.FixedSingle;
+            TxtHours.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtHours.Location = new Point(574, 269);
+            TxtHours.Name = "TxtHours";
+            TxtHours.Size = new Size(293, 35);
+            TxtHours.TabIndex = 33;
+            TxtHours.KeyPress += TxtHours_KeyPress;
+            // 
+            // LblWarning
+            // 
+            LblWarning.AutoSize = true;
+            LblWarning.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            LblWarning.Location = new Point(325, 448);
+            LblWarning.Name = "LblWarning";
+            LblWarning.Size = new Size(265, 21);
+            LblWarning.TabIndex = 29;
+            LblWarning.Text = "Dados salvos com sucesso!";
+            // 
+            // BtnNew
+            // 
+            BtnNew.BackgroundImageLayout = ImageLayout.None;
+            BtnNew.Cursor = Cursors.Hand;
+            BtnNew.FlatStyle = FlatStyle.Flat;
+            BtnNew.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnNew.Location = new Point(44, 394);
+            BtnNew.Name = "BtnNew";
+            BtnNew.Size = new Size(289, 39);
+            BtnNew.TabIndex = 36;
+            BtnNew.Text = "Novo Cargo";
+            BtnNew.UseVisualStyleBackColor = true;
+            BtnNew.Click += BtnNew_Click;
+            // 
+            // BtnDelete
+            // 
+            BtnDelete.BackgroundImageLayout = ImageLayout.None;
+            BtnDelete.Cursor = Cursors.Hand;
+            BtnDelete.FlatStyle = FlatStyle.Flat;
+            BtnDelete.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnDelete.Location = new Point(44, 330);
+            BtnDelete.Name = "BtnDelete";
+            BtnDelete.Size = new Size(289, 39);
+            BtnDelete.TabIndex = 37;
+            BtnDelete.Text = "Remover Cargo";
+            BtnDelete.UseVisualStyleBackColor = true;
+            BtnDelete.Click += BtnDelete_Click;
             // 
             // RoleManagement
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(BtnDelete);
+            Controls.Add(BtnNew);
+            Controls.Add(LblWarning);
+            Controls.Add(LblHours);
+            Controls.Add(TxtHours);
+            Controls.Add(BtnSave);
             Controls.Add(CbHR);
             Controls.Add(label2);
             Controls.Add(TxtRoleWage);
@@ -136,5 +221,11 @@
         private Label label2;
         private TextBox TxtRoleWage;
         private CheckBox CbHR;
+        private Button BtnSave;
+        private Label LblHours;
+        private TextBox TxtHours;
+        private Label LblWarning;
+        private Button BtnNew;
+        private Button BtnDelete;
     }
 }

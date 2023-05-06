@@ -1,6 +1,5 @@
 ﻿using Workers;
 using Workers.dao;
-using System.Net.Http;
 
 namespace newTest
 {
@@ -18,6 +17,8 @@ namespace newTest
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.BackColor = DefaultColors.InputGray;
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             PnlMainLeft.BackColor = DefaultColors.DarkBlue;
             PnlDivider.BackColor = DefaultColors.Gray;
             LblLogoTop.BackColor = DefaultColors.DarkBlue;
@@ -62,9 +63,9 @@ namespace newTest
         // Side Buttons
         private void BtnSignIn_Click(object sender, EventArgs e)
         {
-            LblPath.Text = "Início > Cadastrar Funcionário";
+            LblPath.Text = "Início > Gerenciar Funcionário";
             HideAll();
-            registerEmployee.Show();
+            registerEmployee1.Show();
 
         }
 
@@ -92,6 +93,13 @@ namespace newTest
             ShowMainInfo();
         }
 
+        private void BtnConference_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Consulta de Pontos";
+            HideAll();
+            punchInViewer1.Show();
+        }
+
         private void ShowMainInfo()
         {
             LblPath.Text = "Início > Minha Conta";
@@ -101,8 +109,10 @@ namespace newTest
         private void HideAll()
         {
             punchInControl1.Hide();
-            registerEmployee.Hide();
+            registerEmployee1.Hide();
             userPayroll1.Hide();
+            roleManagement1.Hide();
+            punchInViewer1.Hide();
         }
 
         private void userData1_Load(object sender, EventArgs e)
@@ -117,12 +127,24 @@ namespace newTest
 
         private void registerEmployee_Load(object sender, EventArgs e)
         {
-            registerEmployee.UpdateUser(User);
+            registerEmployee1.UpdateUser(User);
         }
 
         private void userPayroll1_Load(object sender, EventArgs e)
         {
             userPayroll1.UpdateUser(User);
+        }
+
+        private void punchInViewer1_Load(object sender, EventArgs e)
+        {
+            punchInViewer1.UpdateUser(User);
+        }
+
+        private void BtnRole_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Gerenciar Cargos";
+            HideAll();
+            roleManagement1.Show();
         }
     }
 }

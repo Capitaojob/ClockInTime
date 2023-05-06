@@ -138,3 +138,4 @@ C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.pdb
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.genruntimeconfig.cache
 C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\ref\newTest.dll
+C:\Users\T-Gamer\OneDrive\Documentos\1A-STUDY\ADS UNIP\3 SEMESTRE\PIM-III\testes\telas\newTest\newTest\obj\Debug\net6.0-windows\newTest.PunchInViewer.resources

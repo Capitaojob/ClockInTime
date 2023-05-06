@@ -38,11 +38,13 @@
             TxtBirthday = new TextBox();
             LblBirthday = new Label();
             PnlLeft = new Panel();
+            CbEmployees = new ComboBox();
             LblGreet = new Label();
+            LblUpdateUser = new Label();
             LblTz = new Label();
             LblInvalid = new Label();
             comboBoxRoles = new ComboBox();
-            btnRegister = new Button();
+            BtnRegister = new Button();
             TxtPhone = new TextBox();
             LblNumber = new Label();
             TxtCEP = new TextBox();
@@ -146,29 +148,53 @@
             // 
             // PnlLeft
             // 
+            PnlLeft.Controls.Add(CbEmployees);
             PnlLeft.Controls.Add(LblGreet);
+            PnlLeft.Controls.Add(LblUpdateUser);
             PnlLeft.Controls.Add(LblTz);
             PnlLeft.Location = new Point(0, 0);
             PnlLeft.Name = "PnlLeft";
-            PnlLeft.Size = new Size(301, 482);
+            PnlLeft.Size = new Size(300, 482);
             PnlLeft.TabIndex = 20;
+            // 
+            // CbEmployees
+            // 
+            CbEmployees.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            CbEmployees.FormattingEnabled = true;
+            CbEmployees.IntegralHeight = false;
+            CbEmployees.ItemHeight = 25;
+            CbEmployees.Location = new Point(9, 264);
+            CbEmployees.Name = "CbEmployees";
+            CbEmployees.Size = new Size(284, 33);
+            CbEmployees.TabIndex = 35;
             // 
             // LblGreet
             // 
             LblGreet.AutoSize = true;
             LblGreet.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblGreet.Location = new Point(11, 93);
+            LblGreet.Location = new Point(27, 93);
+            LblGreet.MaximumSize = new Size(250, 0);
             LblGreet.Name = "LblGreet";
-            LblGreet.Size = new Size(277, 63);
+            LblGreet.Size = new Size(248, 63);
             LblGreet.TabIndex = 22;
-            LblGreet.Text = "Novo funcionário?  \r\nCadastre-o no sistema e de \r\nas boas vindas!";
-            LblGreet.TextAlign = ContentAlignment.MiddleCenter;
+            LblGreet.Text = "Novo funcionário?  \r\nCadastre-o no sistema e de as boas vindas!";
+            LblGreet.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // LblUpdateUser
+            // 
+            LblUpdateUser.AutoSize = true;
+            LblUpdateUser.Font = new Font("Neon 80s", 16F, FontStyle.Regular, GraphicsUnit.Point);
+            LblUpdateUser.Location = new Point(9, 236);
+            LblUpdateUser.Name = "LblUpdateUser";
+            LblUpdateUser.Size = new Size(231, 22);
+            LblUpdateUser.TabIndex = 34;
+            LblUpdateUser.Text = "Atualizar Funcionário";
             // 
             // LblTz
             // 
             LblTz.AutoSize = true;
             LblTz.Font = new Font("Neon 80s", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            LblTz.Location = new Point(36, 34);
+            LblTz.Location = new Point(36, 39);
             LblTz.Name = "LblTz";
             LblTz.Size = new Size(224, 42);
             LblTz.TabIndex = 21;
@@ -197,18 +223,18 @@
             comboBoxRoles.TabIndex = 14;
             comboBoxRoles.Leave += comboBoxRoles_Leave;
             // 
-            // btnRegister
+            // BtnRegister
             // 
-            btnRegister.Cursor = Cursors.Hand;
-            btnRegister.FlatStyle = FlatStyle.Flat;
-            btnRegister.Font = new Font("Neon 80s", 20F, FontStyle.Regular, GraphicsUnit.Point);
-            btnRegister.Location = new Point(722, 406);
-            btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(162, 46);
-            btnRegister.TabIndex = 20;
-            btnRegister.Text = "Registrar";
-            btnRegister.UseVisualStyleBackColor = true;
-            btnRegister.Click += btnRegister_Click;
+            BtnRegister.Cursor = Cursors.Hand;
+            BtnRegister.FlatStyle = FlatStyle.Flat;
+            BtnRegister.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnRegister.Location = new Point(643, 418);
+            BtnRegister.Name = "BtnRegister";
+            BtnRegister.Size = new Size(241, 35);
+            BtnRegister.TabIndex = 20;
+            BtnRegister.Text = "Registrar";
+            BtnRegister.UseVisualStyleBackColor = true;
+            BtnRegister.Click += btnRegister_Click;
             // 
             // TxtPhone
             // 
@@ -301,7 +327,7 @@
             Controls.Add(LblCEP);
             Controls.Add(TxtPhone);
             Controls.Add(LblNumber);
-            Controls.Add(btnRegister);
+            Controls.Add(BtnRegister);
             Controls.Add(comboBoxRoles);
             Controls.Add(PnlLeft);
             Controls.Add(TxtBirthday);
@@ -337,7 +363,7 @@
         private Label LblTz;
         private Label LblGreet;
         private ComboBox comboBoxRoles;
-        private Button btnRegister;
+        private Button BtnRegister;
         private Label LblInvalid;
         private TextBox TxtPhone;
         private Label LblNumber;
@@ -347,5 +373,7 @@
         private Label LblStreetNumber;
         private TextBox TxtAddSuplement;
         private Label LblAddSuplement;
+        private ComboBox CbEmployees;
+        private Label LblUpdateUser;
     }
 }

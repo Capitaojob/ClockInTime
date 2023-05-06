@@ -6,7 +6,7 @@ namespace PunchIn.dao
     internal interface IPunchInDao
     {
         void Insert(ClockIn clockIn);
-        List<ClockIn> ReadAll(int Id);
+        List<ClockIn> ReadAll(int Id, bool Limit = true);
         void Update(ClockIn clockIn);
         void Delete(ClockIn clockIn);
     }
@@ -15,7 +15,7 @@ namespace PunchIn.dao
     {
         private readonly string connString;
         private const string SQL_INSERT = "INSERT INTO pontos (id_funcionario, data, entrada, saida_al, entrada_al, saida) values (@idEmployee, @date, @entry, @lunchExit, @lunchEntry, @exit)";
-        private const string SQL_READALL = "SELECT * FROM pontos WHERE id_funcionario = @idEmployee ORDER BY data DESC LIMIT 3";
+        private const string SQL_READALL = "SELECT * FROM pontos WHERE id_funcionario = @idEmployee ORDER BY data DESC"; // LIMIT 3
         private const string SQL_SELECT = "SELECT * FROM pontos WHERE data = @date AND id_funcionario = @idEmployee"; 
         private const string SQL_UPDATE = "UPDATE pontos SET id_funcionario = @idEmployee, data = @date, entrada = @entry, saida_al = @lunchExit, entrada_al= @lunchEntry, saida = @exit WHERE id_ponto = @id";
         private const string SQL_DELETE = "DELETE FROM pontos WHERE id_ponto = @id";
@@ -77,13 +77,13 @@ namespace PunchIn.dao
             }
         }
 
-        public List<ClockIn> ReadAll(int Id)
+        public List<ClockIn> ReadAll(int Id, bool Limit = true)
         {
             List<ClockIn> clockIn = new List<ClockIn>();
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_READALL, conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(Limit ? SQL_READALL + " LIMIT 3" : SQL_READALL, conn))
                 {
                     cmd.Parameters.AddWithValue("@idEmployee", Id); 
 

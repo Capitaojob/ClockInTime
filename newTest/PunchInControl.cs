@@ -20,11 +20,10 @@ namespace newTest
 
         private void PunchInControl_Load(object sender, EventArgs e)
         {
-            // Colors
             this.BackColor = DefaultColors.White;
             PnlRight.BackColor = DefaultColors.DarkBlue;
             BtnPunchIn.BackColor = DefaultColors.SandyBrown;
-            BtnPunchIn.ForeColor = DefaultColors.White;
+            BtnPunchIn.FlatAppearance.BorderSize = 0;
             LblLastRegisters.ForeColor = DefaultColors.WhiteGray;
             LblWarningPonto.ForeColor = DefaultColors.WarnRed;
             TxtLastClockIn.BackColor = DefaultColors.White;

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LgRCfc65VesqvOWeQiIYpd0xwiBU5bVFqS8p0B7c0zo10W5AS90bxhJXh/n+r9WIFM44snNuZir+nteRRzdUjA==",
+  "dgSpecHash": "EHV1W4Z9JVEz+zclmpDdDRE+uZZyruiDThFmJUglVKmgKVP7qVYlQDw+520PJzxKbnx7OZI0Ymnovey7sHnIHw==",
   "success": true,
   "projectFilePath": "C:\\Users\\T-Gamer\\OneDrive\\Documentos\\1A-STUDY\\ADS UNIP\\3 SEMESTRE\\PIM-III\\testes\\telas\\newTest\\newTest\\newTest.csproj",
   "expectedPackageFiles": [
@@ -105,7 +105,7 @@
     "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.cryptography.pkcs\\7.0.1\\system.security.cryptography.pkcs.7.0.1.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.cryptography.primitives\\4.3.0\\system.security.cryptography.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.cryptography.protecteddata\\7.0.1\\system.security.cryptography.protecteddata.7.0.1.nupkg.sha512",
-    "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.cryptography.x509certificates\\4.3.0\\system.security.cryptography.x509certificates.4.3.0.nupkg.sha512",
+    "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.cryptography.x509certificates\\4.3.2\\system.security.cryptography.x509certificates.4.3.2.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.cryptography.xml\\7.0.1\\system.security.cryptography.xml.7.0.1.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.permissions\\7.0.0\\system.security.permissions.7.0.0.nupkg.sha512",
     "C:\\Users\\T-Gamer\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",

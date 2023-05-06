@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[1.2.0, )"
             },
+            "System.Security.Cryptography.X509Certificates": {
+              "target": "Package",
+              "version": "[4.3.2, )"
+            },
             "iTextSharp.LGPLv2.Core": {
               "target": "Package",
               "version": "[3.3.5, )"

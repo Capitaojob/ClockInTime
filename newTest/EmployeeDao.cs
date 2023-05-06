@@ -18,7 +18,9 @@ namespace Workers.dao
         private const string SQL_INSERT = "INSERT INTO funcionarios (nome, email, cpf, nascimento, cargo, status) VALUES (@name, @email, @cpf, @birthday, @role, @status)";
         private const string SQL_READALL = "SELECT * FROM funcionarios";
         private const string SQL_SELECT = "SELECT * FROM funcionarios WHERE email = @email";
+        private const string SQL_LOGIN = "SELECT * FROM funcionarios WHERE email = @email AND senha = @password";
         private const string SQL_UPDATE = "UPDATE funcionarios SET nome = @name, email = @email, cpf = @cpf, nascimento = @birthday, cargo = @role, status = @status, senha = @password WHERE id = @id";
+        //Will Change
         private const string SQL_HRROLE = "SELECT * FROM cargo WHERE id_cargo = @id AND dp = true";
         private const string SQL_SELECTROLE = "SELECT nome_cargo FROM cargo JOIN funcionarios ON funcionarios.cargo = cargo.id_cargo WHERE id = @id";
         private const string SQL_DELETE = "DELETE FROM funcionarios WHERE id = @id";
@@ -79,15 +81,16 @@ namespace Workers.dao
             return employees;
         }
 
-        public Employee? SelectSpecific(string Email)
+        public Employee? SelectSpecific(string Email, string Password = "")
         {
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_SELECT, conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(Password == "" ? SQL_SELECT : SQL_LOGIN, conn))
                 {
                     cmd.Parameters.AddWithValue("@email", Email);
+                    cmd.Parameters.AddWithValue("@password", Password);
 
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())
                     {

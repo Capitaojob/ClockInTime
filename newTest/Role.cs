@@ -2,69 +2,19 @@
 {
     public class Role
     {
-        private int _id;
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        public int Id { get; set; }
 
-        private string _name = "";
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        }
+        public string Name { get; set; }
 
-        private int _hours = 0;
-        public int Hours
-        {
-            get
-            {
-                return _hours;
-            }
-            set
-            {
-                _hours = value;
-            }
-        }
+        public int Hours { get; set; }
 
-        private decimal _wage = 0;
-        public decimal Wage
-        {
-            get
-            {
-                return _wage;
-            }
-            set
-            {
-                _wage = value;
-            }
-        }
+        public decimal Wage { get; set; }
 
-        private bool _dp = false;
-        public bool Dp
+        public bool Dp { get; set; }
+
+        public Role()
         {
-            get
-            {
-                return _dp;
-            }
-            set 
-            { 
-                _dp = value; 
-            }
+            this.Name = "";
         }
     }
 }

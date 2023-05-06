@@ -3,6 +3,8 @@ using Location;
 using Location.dao;
 using Newtonsoft.Json.Linq;
 using Npgsql;
+using Roles.Dao;
+using Roles;
 using Workers;
 using Workers.dao;
 
@@ -11,6 +13,7 @@ namespace newTest
     public partial class RegisterEmployee : UserControl
     {
         Dictionary<string, int> RoleDictionary = new Dictionary<string, int>();
+        Dictionary<string, int> EmployeeDictionary = new Dictionary<string, int>();
         Employee User = new Employee();
 
         public RegisterEmployee()
@@ -24,14 +27,16 @@ namespace newTest
             PnlLeft.BackColor = DefaultColors.DarkBlue;
             LblTz.ForeColor = DefaultColors.SandyBrown;
             LblGreet.ForeColor = DefaultColors.Gray;
-            btnRegister.BackColor = DefaultColors.SandyBrown;
+            BtnRegister.BackColor = DefaultColors.SandyBrown;
             LblInvalid.ForeColor = DefaultColors.WarnRed;
-            btnRegister.FlatAppearance.BorderSize = 0;
+            LblUpdateUser.ForeColor = DefaultColors.White;
+            BtnRegister.FlatAppearance.BorderSize = 0;
 
             LblInvalid.Visible = false;
 
+            if (DesignMode) return;
             QueryRoles();
-            AddComboValues();
+            QueryEmployees();
         }
 
         public void UpdateUser(Employee User)
@@ -200,29 +205,77 @@ namespace newTest
             }
         }
 
-        private void QueryRoles()
+        // Employee Combo Box
+
+        private void QueryEmployees()
         {
-            string connString = DbConnection.connString;
-            string sql = "SELECT id_cargo, nome_cargo FROM cargo;";
+            EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
+            List<Employee> employees = psql.ReadAll();
 
-            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+            EmployeeDictionary.Clear();
+
+            foreach (Employee e in employees)
             {
-                conn.Open();
+                EmployeeDictionary.Add(e.Email, e.Id);
+            }
 
-                using (NpgsqlCommand cmd = new NpgsqlCommand(sql, conn))
-                {
-                    using (NpgsqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            RoleDictionary.Add(reader.GetString(1), reader.GetInt32(0));
-                        }
-                    }
-                }
+            AddEmployeeComboValues();
+        }
+
+        private void AddEmployeeComboValues()
+        {
+            CbEmployees.Items.Clear();
+
+            foreach (KeyValuePair<string, int> item in EmployeeDictionary)
+            {
+                CbEmployees.Items.Add(item.Key);
             }
         }
 
-        private void AddComboValues()
+        //private void comboBoxRoles_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (comboBoxRoles.SelectedIndex == -1)
+        //        {
+        //            return;
+        //        }
+
+        //        RoleDaoPostgres psql = new RoleDaoPostgres();
+        //        Role? role = psql.SelectSpecific(RoleDictionary[comboBoxRoles.SelectedItem.ToString()]);
+
+        //        if (role == null)
+        //        {
+        //            return;
+        //        }
+
+        //        //TxtRoleName.Text = role.Name;
+        //        //TxtRoleWage.Text = role.Wage.ToString();
+        //        //TxtHours.Text = role.Hours.ToString();
+        //        //CbHR.Checked = role.Dp;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Erro! " + ex);
+        //    }
+        //}
+
+        // Role Combo Box
+
+        private void QueryRoles()
+        {
+            RoleDaoPostgres psql = new RoleDaoPostgres();
+            List<Role> roles = psql.ReadAll();
+
+            foreach (Role role in roles)
+            {
+                RoleDictionary.Add(role.Name, role.Id);
+            }
+
+            AddRoleComboValues();
+        }
+
+        private void AddRoleComboValues()
         {
             foreach (KeyValuePair<string, int> item in RoleDictionary)
             {
