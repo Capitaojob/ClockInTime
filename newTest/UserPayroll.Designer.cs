@@ -108,7 +108,7 @@
             // 
             LblIntro.AutoSize = true;
             LblIntro.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblIntro.Location = new Point(21, 87);
+            LblIntro.Location = new Point(21, 103);
             LblIntro.MaximumSize = new Size(270, 0);
             LblIntro.Name = "LblIntro";
             LblIntro.Size = new Size(265, 105);
@@ -120,17 +120,17 @@
             // 
             LblWelcome.AutoSize = true;
             LblWelcome.Font = new Font("Neon 80s", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            LblWelcome.Location = new Point(39, 38);
+            LblWelcome.Location = new Point(3, 42);
             LblWelcome.Name = "LblWelcome";
-            LblWelcome.Size = new Size(224, 42);
+            LblWelcome.Size = new Size(294, 42);
             LblWelcome.TabIndex = 24;
-            LblWelcome.Text = "TzSoluções";
+            LblWelcome.Text = "Demonstrativo";
             // 
             // LblDirectory
             // 
             LblDirectory.AutoSize = true;
             LblDirectory.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblDirectory.Location = new Point(346, 252);
+            LblDirectory.Location = new Point(346, 221);
             LblDirectory.Name = "LblDirectory";
             LblDirectory.Size = new Size(91, 21);
             LblDirectory.TabIndex = 6;
@@ -139,7 +139,7 @@
             // BtnFolder
             // 
             BtnFolder.Font = new Font("Neon 80s", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnFolder.Location = new Point(345, 276);
+            BtnFolder.Location = new Point(345, 245);
             BtnFolder.Name = "BtnFolder";
             BtnFolder.Size = new Size(521, 38);
             BtnFolder.TabIndex = 0;

@@ -15,6 +15,8 @@ namespace newTest
 
         private void ForgotPassword_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.Clock;
+
             this.BackColor = DefaultColors.DarkBlue;
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
