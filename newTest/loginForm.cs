@@ -13,6 +13,8 @@ namespace newTest
 
         private void loginForm_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.Clock;
+
             this.BackColor = DefaultColors.DarkBlue;
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

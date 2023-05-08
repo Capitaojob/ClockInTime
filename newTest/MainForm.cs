@@ -16,6 +16,8 @@ namespace newTest
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources.Clock;
+
             this.BackColor = DefaultColors.InputGray;
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -83,6 +85,13 @@ namespace newTest
             userPayroll1.Show();
         }
 
+        private void LblQuestionMark_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > FAQ";
+            HideAll();
+            helpInfo1.Show();
+        }
+
         private void PnlUserInfo_Click(object sender, EventArgs e)
         {
             ShowMainInfo();
@@ -113,6 +122,9 @@ namespace newTest
             userPayroll1.Hide();
             roleManagement1.Hide();
             punchInViewer1.Hide();
+            helpInfo1.Hide();
+            punchInViewerGeneral1.Hide();
+            generalPayroll1.Hide();
         }
 
         private void userData1_Load(object sender, EventArgs e)
@@ -123,11 +135,6 @@ namespace newTest
         private void punchInControl1_Load(object sender, EventArgs e)
         {
             punchInControl1.UpdateUser(User);
-        }
-
-        private void registerEmployee_Load(object sender, EventArgs e)
-        {
-            registerEmployee1.UpdateUser(User);
         }
 
         private void userPayroll1_Load(object sender, EventArgs e)
@@ -145,6 +152,20 @@ namespace newTest
             LblPath.Text = "Início > Gerenciar Cargos";
             HideAll();
             roleManagement1.Show();
+        }
+
+        private void BtnManageUsers_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Consulta de Pontos Gerais";
+            HideAll();
+            punchInViewerGeneral1.Show();
+        }
+
+        private void BtnGeneralPayment_Click(object sender, EventArgs e)
+        {
+            LblPath.Text = "Início > Demonstrativo de Pagamento Geral";
+            HideAll();
+            generalPayroll1.Show();
         }
     }
 }

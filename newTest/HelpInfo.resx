@@ -1,0 +1,91 @@
+﻿<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LblHelp.Text" xml:space="preserve">
+    <value>Olá, bem-vindo(a) ao ClockInTime, nosso software de gestão de pontos e pagamento! Aqui estão algumas orientações para ajudá-lo(a) a navegar pelo sistema.
+
+No menu principal, você encontrará três botões principais que estão disponíveis para todos os usuários no canto esquerdo:
+
+   1. "Registro de Pontos": Use este botão para registrar as suas entradas e saídas do trabalho. Basta clicar no botão "Bater Ponto" no horário correspondente.
+
+   2. "Consulta de Pontos": Este botão permite que você veja todos os seus registros de ponto, desde o momento em que começou a usar o sistema.
+
+   3. "Demonstrativo de pagamento": Utilize este botão para gerar o demonstrativo de pagamento do mês selecionado. É importante escolher o mês correto para ter as informações corretas.
+
+Além destes, 2 botões se encontram no canto superior direito da tela:
+
+   1. O botão dourado com o ponto de interrogação "?" mostra a documentação do sistema ao usuário, ou seja, a tela atual, onde pode-se encontrar informações sobre as funcionalidades do sistema.
+
+   2. O botão azul com o símbolo de usuário ""
+
+Para os usuários com permissão de gerência (como funcionários de RH), existem mais quatro botões disponíveis:
+
+   1. "Gerenciar Pontos": Aqui é possível gerenciar os pontos de qualquer usuário, incluindo a possibilidade de editar ou corrigir registros de ponto.
+
+   2. "Gerenciar Funcionários": Este botão permite criar novos usuários, editar informações de usuários existentes ou inativá-los.
+
+   3. "Gerenciar Cargos": Com este botão é possível criar, editar ou remover cargos de trabalho.
+
+   4. "Demonstrativo de Pagamento Geral": Use este botão para gerar o demonstrativo de pagamento de qualquer usuário específico ou para gerar o demonstrativo de pagamento de todos os usuários da empresa ao mesmo tempo.
+
+Lembre-se de que este software é uma ferramenta valiosa para gerenciar suas horas de trabalho e salário. Se você tiver alguma dúvida ou precisar de ajuda com alguma funcionalidade, não hesite em entrar em contato com o suporte técnico para obter assistência.
+
+</value>
+  </data>
+</root>

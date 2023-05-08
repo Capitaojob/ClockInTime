@@ -194,7 +194,7 @@
             Controls.Add(MiddlePanel);
             Name = "loginForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "PointPay - Login";
+            Text = "ClockInTime - Login";
             Load += loginForm_Load;
             MiddlePanel.ResumeLayout(false);
             MiddlePanel.PerformLayout();
