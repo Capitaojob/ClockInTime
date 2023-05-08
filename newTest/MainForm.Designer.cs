@@ -51,12 +51,15 @@ namespace newTest
             label1 = new Label();
             LblPath = new Label();
             PnlMainContent = new Panel();
+            punchInViewerGeneral1 = new PunchInViewerGeneral();
+            helpInfo1 = new HelpInfo();
             punchInViewer1 = new PunchInViewer();
             registerEmployee1 = new RegisterEmployee();
             roleManagement1 = new RoleManagement();
             userPayroll1 = new UserPayroll();
             punchInControl1 = new PunchInControl();
             userData1 = new UserData();
+            generalPayroll1 = new GeneralPayroll();
             PnlMainLeft.SuspendLayout();
             PnlInfoCircle.SuspendLayout();
             PnlUserInfo.SuspendLayout();
@@ -81,7 +84,7 @@ namespace newTest
             PnlMainLeft.Controls.Add(LblLogoTop);
             PnlMainLeft.Location = new Point(0, 0);
             PnlMainLeft.Name = "PnlMainLeft";
-            PnlMainLeft.Size = new Size(221, 620);
+            PnlMainLeft.Size = new Size(221, 621);
             PnlMainLeft.TabIndex = 0;
             // 
             // BtnManageUsers
@@ -95,6 +98,7 @@ namespace newTest
             BtnManageUsers.TabIndex = 11;
             BtnManageUsers.Text = "Consulta de Pontos Geral";
             BtnManageUsers.UseVisualStyleBackColor = true;
+            BtnManageUsers.Click += BtnManageUsers_Click;
             // 
             // BtnGeneralPayment
             // 
@@ -107,6 +111,7 @@ namespace newTest
             BtnGeneralPayment.TabIndex = 10;
             BtnGeneralPayment.Text = "Demonstrativo Pagamento Geral";
             BtnGeneralPayment.UseVisualStyleBackColor = true;
+            BtnGeneralPayment.Click += BtnGeneralPayment_Click;
             // 
             // LblManagement
             // 
@@ -223,7 +228,7 @@ namespace newTest
             PnlDivider.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             PnlDivider.Location = new Point(0, 68);
             PnlDivider.Name = "PnlDivider";
-            PnlDivider.Size = new Size(1233, 2);
+            PnlDivider.Size = new Size(1231, 2);
             PnlDivider.TabIndex = 2;
             // 
             // PnlInfoCircle
@@ -233,10 +238,11 @@ namespace newTest
             PnlInfoCircle.BackgroundImageLayout = ImageLayout.Zoom;
             PnlInfoCircle.Controls.Add(LblQuestionMark);
             PnlInfoCircle.Cursor = Cursors.Hand;
-            PnlInfoCircle.Location = new Point(1080, 7);
+            PnlInfoCircle.Location = new Point(1078, 7);
             PnlInfoCircle.Name = "PnlInfoCircle";
             PnlInfoCircle.Size = new Size(55, 55);
             PnlInfoCircle.TabIndex = 3;
+            PnlInfoCircle.Click += LblQuestionMark_Click;
             // 
             // LblQuestionMark
             // 
@@ -250,6 +256,7 @@ namespace newTest
             LblQuestionMark.Size = new Size(36, 40);
             LblQuestionMark.TabIndex = 2;
             LblQuestionMark.Text = "?";
+            LblQuestionMark.Click += LblQuestionMark_Click;
             // 
             // PnlUserInfo
             // 
@@ -259,7 +266,7 @@ namespace newTest
             PnlUserInfo.Controls.Add(PbUser);
             PnlUserInfo.Controls.Add(label1);
             PnlUserInfo.Cursor = Cursors.Hand;
-            PnlUserInfo.Location = new Point(1150, 7);
+            PnlUserInfo.Location = new Point(1148, 7);
             PnlUserInfo.Name = "PnlUserInfo";
             PnlUserInfo.Size = new Size(55, 55);
             PnlUserInfo.TabIndex = 4;
@@ -302,6 +309,9 @@ namespace newTest
             // PnlMainContent
             // 
             PnlMainContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PnlMainContent.Controls.Add(generalPayroll1);
+            PnlMainContent.Controls.Add(punchInViewerGeneral1);
+            PnlMainContent.Controls.Add(helpInfo1);
             PnlMainContent.Controls.Add(punchInViewer1);
             PnlMainContent.Controls.Add(registerEmployee1);
             PnlMainContent.Controls.Add(roleManagement1);
@@ -310,8 +320,24 @@ namespace newTest
             PnlMainContent.Controls.Add(userData1);
             PnlMainContent.Location = new Point(262, 112);
             PnlMainContent.Name = "PnlMainContent";
-            PnlMainContent.Size = new Size(914, 482);
+            PnlMainContent.Size = new Size(912, 482);
             PnlMainContent.TabIndex = 1;
+            // 
+            // punchInViewerGeneral1
+            // 
+            punchInViewerGeneral1.BackColor = Color.FromArgb(248, 250, 255);
+            punchInViewerGeneral1.Location = new Point(0, 0);
+            punchInViewerGeneral1.Name = "punchInViewerGeneral1";
+            punchInViewerGeneral1.Size = new Size(914, 482);
+            punchInViewerGeneral1.TabIndex = 13;
+            // 
+            // helpInfo1
+            // 
+            helpInfo1.BackColor = Color.FromArgb(248, 250, 255);
+            helpInfo1.Location = new Point(0, 0);
+            helpInfo1.Name = "helpInfo1";
+            helpInfo1.Size = new Size(914, 482);
+            helpInfo1.TabIndex = 12;
             // 
             // punchInViewer1
             // 
@@ -329,7 +355,6 @@ namespace newTest
             registerEmployee1.Name = "registerEmployee1";
             registerEmployee1.Size = new Size(914, 482);
             registerEmployee1.TabIndex = 9;
-            registerEmployee1.Load += registerEmployee_Load;
             // 
             // roleManagement1
             // 
@@ -367,6 +392,14 @@ namespace newTest
             userData1.TabIndex = 10;
             userData1.Load += userData1_Load;
             // 
+            // generalPayroll1
+            // 
+            generalPayroll1.BackColor = Color.FromArgb(248, 250, 255);
+            generalPayroll1.Location = new Point(0, 0);
+            generalPayroll1.Name = "generalPayroll1";
+            generalPayroll1.Size = new Size(914, 482);
+            generalPayroll1.TabIndex = 14;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -381,7 +414,7 @@ namespace newTest
             Controls.Add(PnlMainLeft);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "PointPay - Início";
+            Text = "ClockInTime";
             Load += MainForm_Load;
             PnlMainLeft.ResumeLayout(false);
             PnlMainLeft.PerformLayout();
@@ -425,5 +458,8 @@ namespace newTest
         private RegisterEmployee registerEmployee1;
         private UserData userData1;
         private PunchInViewer punchInViewer1;
+        private HelpInfo helpInfo1;
+        private PunchInViewerGeneral punchInViewerGeneral1;
+        private GeneralPayroll generalPayroll1;
     }
 }

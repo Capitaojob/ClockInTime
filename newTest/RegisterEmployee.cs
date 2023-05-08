@@ -7,6 +7,8 @@ using Roles.Dao;
 using Roles;
 using Workers;
 using Workers.dao;
+using Phone.dao;
+using Phone;
 
 namespace newTest
 {
@@ -14,7 +16,12 @@ namespace newTest
     {
         Dictionary<string, int> RoleDictionary = new Dictionary<string, int>();
         Dictionary<string, int> EmployeeDictionary = new Dictionary<string, int>();
-        Employee User = new Employee();
+        //Employee User = new Employee();
+
+        // Update Variables
+        Employee updEmployee = new Employee();
+        Address updAddress = new Address();
+        Phones updPhone = new Phones();
 
         public RegisterEmployee()
         {
@@ -25,23 +32,24 @@ namespace newTest
         {
             this.BackColor = DefaultColors.White;
             PnlLeft.BackColor = DefaultColors.DarkBlue;
+
             LblTz.ForeColor = DefaultColors.SandyBrown;
             LblGreet.ForeColor = DefaultColors.Gray;
-            BtnRegister.BackColor = DefaultColors.SandyBrown;
             LblInvalid.ForeColor = DefaultColors.WarnRed;
             LblUpdateUser.ForeColor = DefaultColors.White;
+
+            BtnRegister.BackColor = DefaultColors.SandyBrown;
             BtnRegister.FlatAppearance.BorderSize = 0;
+            BtnNew.BackColor = DefaultColors.SandyBrown;
+            BtnNew.FlatAppearance.BorderSize = 0;
+            BtnDisable.BackColor = DefaultColors.WarnPink;
+            BtnDisable.FlatAppearance.BorderSize = 0;
 
             LblInvalid.Visible = false;
 
             if (DesignMode) return;
             QueryRoles();
             QueryEmployees();
-        }
-
-        public void UpdateUser(Employee User)
-        {
-            this.User = User;
         }
 
         private void TxtName_Leave(object sender, EventArgs e)
@@ -103,18 +111,24 @@ namespace newTest
             }
             else if (Field == "Email")
             {
-                if (!TxtEmail.Text.Contains('@') || !(TxtEmail.Text.Length >= 3))
+                EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+                if (Epsql.SelectSpecific(TxtEmail.Text) == null ? false : true && BtnRegister.Text != "Atualizar")
+                {
+                    TxtEmail.BackColor = DefaultColors.WarnPink;
+                    LblInvalid.Text = "Email já cadastrado!";
+                    LblInvalid.Visible = true;
+                    return false;
+                }
+                else if (!TxtEmail.Text.Contains('@') || !(TxtEmail.Text.Length >= 3))
                 {
                     TxtEmail.BackColor = DefaultColors.WarnPink;
                     LblInvalid.Text = "Campo Email Inválido!";
                     LblInvalid.Visible = true;
-
                     return false;
                 }
                 else
                 {
                     TxtEmail.BackColor = SystemColors.Window;
-
                     return true;
                 }
             }
@@ -160,9 +174,9 @@ namespace newTest
             }
             else if (Field == "Role")
             {
-                if (comboBoxRoles.SelectedIndex == -1)
+                if (CbRoles.SelectedIndex == -1)
                 {
-                    comboBoxRoles.BackColor = DefaultColors.WarnPink;
+                    CbRoles.BackColor = DefaultColors.WarnPink;
                     LblInvalid.Text = "Campo Cargo Inválido!";
                     LblInvalid.Visible = true;
 
@@ -170,7 +184,7 @@ namespace newTest
                 }
                 else
                 {
-                    comboBoxRoles.BackColor = SystemColors.Window;
+                    CbRoles.BackColor = SystemColors.Window;
 
                     return true;
                 }
@@ -206,7 +220,6 @@ namespace newTest
         }
 
         // Employee Combo Box
-
         private void QueryEmployees()
         {
             EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
@@ -232,36 +245,92 @@ namespace newTest
             }
         }
 
-        //private void comboBoxRoles_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (comboBoxRoles.SelectedIndex == -1)
-        //        {
-        //            return;
-        //        }
+        private void CbEmployees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                LblInvalid.ForeColor = DefaultColors.WarnPink;
+                LblInvalid.Visible = false;
 
-        //        RoleDaoPostgres psql = new RoleDaoPostgres();
-        //        Role? role = psql.SelectSpecific(RoleDictionary[comboBoxRoles.SelectedItem.ToString()]);
+                if (CbEmployees.SelectedIndex == -1)
+                {
+                    BtnRegister.Text = "Registrar";
+                    return;
+                }
 
-        //        if (role == null)
-        //        {
-        //            return;
-        //        }
+                EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+                Employee? employee = Epsql.SelectSpecific(CbEmployees.SelectedItem.ToString());
 
-        //        //TxtRoleName.Text = role.Name;
-        //        //TxtRoleWage.Text = role.Wage.ToString();
-        //        //TxtHours.Text = role.Hours.ToString();
-        //        //CbHR.Checked = role.Dp;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Erro! " + ex);
-        //    }
-        //}
+                if (employee == null)
+                {
+                    return;
+                }
+
+                ClearInputs();
+
+                // General Info
+                updEmployee = employee;
+                TxtName.Text = employee.Name;
+                TxtEmail.Text = employee.Email;
+                TxtCPF.Text = employee.CPF;
+                TxtBirthday.Text = employee.Birthday.Date.ToString("dd/MM/yyyy");
+
+                // Role Combo Box
+                RoleDaoPostgres Rpsql = new RoleDaoPostgres();
+                string role = Rpsql.SelectSpecific(employee.Role).Name;
+                if (role == null)
+                {
+                    LblInvalid.Visible = true;
+                    LblInvalid.Text = "Cargo não encontrado!";
+                }
+                else
+                {
+                    int index = CbRoles.FindStringExact(role);
+                    if (index != -1)
+                    {
+                        CbRoles.SelectedIndex = index;
+                    }
+                }
+
+                // Address Text
+                AddressDaoPostgres Apsql = new AddressDaoPostgres();
+                Address address = Apsql.SelectSpecific(employee.Id);
+                if (address == null)
+                {
+                    LblInvalid.Visible = true;
+                    LblInvalid.Text = "Endereço não encontrado!";
+                }
+                else
+                {
+                    updAddress = address;
+                    TxtCEP.Text = address.CEP;
+                    TxtNumber.Text = address.Number.ToString();
+                    TxtAddSuplement.Text = address.Suplement;
+                }
+
+                // Phone Text
+                PhoneDaoPostgres Ppsql = new PhoneDaoPostgres();
+                Phones phone = Ppsql.SelectSpecific(employee.Id);
+                if (phone == null)
+                {
+                    LblInvalid.Visible = true;
+                    LblInvalid.Text = "Telefone não encontrado!";
+                }
+                else
+                {
+                    updPhone = phone;
+                    TxtPhone.Text = phone.Number;
+                }
+
+                BtnRegister.Text = "Atualizar";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro! " + ex);
+            }
+        }
 
         // Role Combo Box
-
         private void QueryRoles()
         {
             RoleDaoPostgres psql = new RoleDaoPostgres();
@@ -274,15 +343,15 @@ namespace newTest
 
             AddRoleComboValues();
         }
-
         private void AddRoleComboValues()
         {
             foreach (KeyValuePair<string, int> item in RoleDictionary)
             {
-                comboBoxRoles.Items.Add(item.Key);
+                CbRoles.Items.Add(item.Key);
             }
         }
 
+        // CPF / CEP Validation
         private string FormatCPF(string CPF)
         {
             char[] chars = CPF.ToCharArray();
@@ -299,7 +368,7 @@ namespace newTest
             return FormatedCPF;
         }
 
-        private async void CheckCEP()
+        private async Task<bool> CheckCEP()
         {
             string CEP = TxtCEP.Text;
 
@@ -316,24 +385,23 @@ namespace newTest
 
                     TxtCEP.BackColor = SystemColors.Window;
 
-                    if (!dataObj.ContainsKey("erro"))
-                    {
-                        return;
-                    }
+                    if (!dataObj.ContainsKey("erro")) return true;
                 }
 
                 TxtCEP.BackColor = DefaultColors.WarnPink;
                 LblInvalid.Text = "Campo CEP Inválido!";
                 LblInvalid.Visible = true;
+                return false;
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex + "\n\nCEP não encontrado! Digite novamente");
+                return false;
             }
         }
 
-        private async Task<bool> FillCEP()
+        private async Task<Address> GetAddress(int Id)
         {
             string CEP = TxtCEP.Text;
 
@@ -350,13 +418,13 @@ namespace newTest
 
                     if (dataObj.ContainsKey("erro") || TxtNumber.Text == "")
                     {
-                        return false;
+                        return null;
+                        //return false;
                     }
 
                     Address address = new Address();
 
-                    EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
-                    address.Id = Epsql.SelectNextId();
+                    address.Id = Id;
                     address.CEP = CEP;
                     address.Street = dataObj["logradouro"].ToString();
                     address.Number = int.Parse(TxtNumber.Text);
@@ -365,71 +433,175 @@ namespace newTest
                     address.City = dataObj["localidade"].ToString();
                     address.State = dataObj["uf"].ToString();
 
-                    AddressDaoPostgres psql = new AddressDaoPostgres();
-
-                    psql.Insert(address);
+                    return address;
+                    //AddressDaoPostgres psql = new AddressDaoPostgres();
+                    //psql.Insert(address);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Erro: {ex.Message}\n\nTente novamente!");
+                    return null;
                 }
-
-
-                return true;
+                //return true;
             }
             else
             {
                 MessageBox.Show($"CEP não encontrado, erro {response.StatusCode}. Digite novamente");
-                return false;
+                return null;
             }
         }
 
+        // Input Manage
+        private void ClearInputs()
+        {
+            TxtName.Text = "";
+            TxtEmail.Text = "";
+            TxtCPF.Text = "";
+            TxtBirthday.Text = "";
+            TxtAddSuplement.Text = "";
+            TxtCEP.Text = "";
+            TxtNumber.Text = "";
+            TxtPhone.Text = "";
+            CbRoles.SelectedIndex = -1;
+            CbEmployees.SelectedIndex = -1;
+            LblInvalid.Visible = false;
+        }
+
+        private void ResetInputColors()
+        {
+            TxtName.BackColor = SystemColors.Window;
+            TxtCPF.BackColor = SystemColors.Window;
+            TxtEmail.BackColor = SystemColors.Window;
+            TxtBirthday.BackColor = SystemColors.Window;
+            TxtAddSuplement.BackColor = SystemColors.Window;
+            TxtCEP.BackColor = SystemColors.Window;
+            TxtNumber.BackColor = SystemColors.Window;
+            TxtPhone.BackColor = SystemColors.Window;
+        }
+
+        // Buttons
         private async void btnRegister_Click(object sender, EventArgs e)
         {
-            if (ValidateField("Name") && ValidateField("Email") && ValidateField("CPF") && ValidateField("Birthday") && ValidateField("Phone") && comboBoxRoles.SelectedItem != null)
+            if (ValidateField("Name") && ValidateField("Email") && ValidateField("CPF") && ValidateField("Birthday") && ValidateField("Phone") && CbRoles.SelectedItem != null)
             {
-                bool isCepCorrect = await FillCEP();
-                if (RoleDictionary.ContainsKey(comboBoxRoles.SelectedItem.ToString()) && isCepCorrect)
+                bool isCepCorrect = await CheckCEP(); //GetAddress
+                if (RoleDictionary.ContainsKey(CbRoles.SelectedItem.ToString()) && isCepCorrect)
                 {
-                    try
+                    if (BtnRegister.Text == "Atualizar")
                     {
-                        string connString = DbConnection.connString;
-                        string SQL_INSERT = "INSERT INTO funcionarios (nome, email, cpf, nascimento, cargo, status, senha) VALUES (@name, @email, @cpf, @birthday, @role, '1', @password)";
-
-                        using (NpgsqlConnection conn = new NpgsqlConnection(connString))
+                        try
                         {
-                            conn.Open();
+                            // Update User
+                            updEmployee.Name = TxtName.Text;
+                            updEmployee.Email = TxtEmail.Text;
+                            updEmployee.Birthday = DateTime.Parse(TxtBirthday.Text);
+                            updEmployee.CPF = TxtCPF.Text;
+                            updEmployee.Role = RoleDictionary[CbRoles.SelectedItem.ToString()];
 
-                            using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_INSERT, conn))
+                            EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+                            Epsql.Update(updEmployee);
+
+                            // Update Address
+                            updAddress = await GetAddress(updEmployee.Id);
+                            updAddress.Number = int.Parse(TxtNumber.Text);
+                            updAddress.Suplement = TxtAddSuplement.Text;
+
+                            AddressDaoPostgres Apsql = new AddressDaoPostgres();
+                            Apsql.Update(updAddress);
+
+                            // Update Phone
+                            updPhone.Number = TxtPhone.Text;
+
+                            PhoneDaoPostgres Ppsql = new PhoneDaoPostgres();
+                            Ppsql.Update(updPhone);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Erro! " + ex);
+                        }
+
+                        LblInvalid.Text = "Usuário Atualizado!";
+                        BtnRegister.Text = "Registrar";
+
+                    }
+                    else
+                    {
+                        try
+                        {
+                            // Register Address
+                            EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+                            int Id = Epsql.SelectNextId();
+
+                            Address address = await GetAddress(Id);
+                            AddressDaoPostgres psql = new AddressDaoPostgres();
+                            psql.Insert(address);
+
+                            // Register Phone
+                            PhoneDaoPostgres Ppsql = new PhoneDaoPostgres();
+                            Ppsql.Insert(Id, TxtPhone.Text);
+
+                            // Register User
+                            string connString = DbConnection.connString;
+                            string SQL_INSERT = "INSERT INTO funcionarios (nome, email, cpf, nascimento, cargo, status, senha) VALUES (@name, @email, @cpf, @birthday, @role, '1', @password)";
+
+                            using (NpgsqlConnection conn = new NpgsqlConnection(connString))
                             {
-                                cmd.Parameters.AddWithValue("@name", TxtName.Text);
-                                cmd.Parameters.AddWithValue("@email", TxtEmail.Text);
-                                cmd.Parameters.AddWithValue("@cpf", FormatCPF(TxtCPF.Text));
-                                cmd.Parameters.AddWithValue("@birthday", DateTime.Parse(TxtBirthday.Text));
-                                cmd.Parameters.AddWithValue("@role", RoleDictionary[comboBoxRoles.SelectedItem.ToString()]);
-                                cmd.Parameters.AddWithValue("@password", HashUtils.HashString("tz1234"));
-                                cmd.ExecuteNonQuery();
+                                conn.Open();
+
+                                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_INSERT, conn))
+                                {
+                                    cmd.Parameters.AddWithValue("@name", TxtName.Text);
+                                    cmd.Parameters.AddWithValue("@email", TxtEmail.Text);
+                                    cmd.Parameters.AddWithValue("@cpf", FormatCPF(TxtCPF.Text));
+                                    cmd.Parameters.AddWithValue("@birthday", DateTime.Parse(TxtBirthday.Text));
+                                    cmd.Parameters.AddWithValue("@role", RoleDictionary[CbRoles.SelectedItem.ToString()]);
+                                    cmd.Parameters.AddWithValue("@password", HashUtils.HashString("tz1234"));
+                                    cmd.ExecuteNonQuery();
+                                }
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
 
+                        LblInvalid.Text = "Usuário Cadastrado!";
+                    }
                     LblInvalid.ForeColor = DefaultColors.SandyBrown;
                     LblInvalid.Visible = true;
-                    LblInvalid.Text = "Usuário Cadastrado!";
+                    ClearInputs();
+                    QueryEmployees();
+                }
+            }
+        }
 
-                    TxtName.Text = "";
-                    TxtEmail.Text = "";
-                    TxtCPF.Text = "";
-                    TxtBirthday.Text = "";
-                    TxtAddSuplement.Text = "";
-                    TxtCEP.Text = "";
-                    TxtNumber.Text = "";
-                    TxtPhone.Text = "";
-                    comboBoxRoles.SelectedIndex = -1;
+        private void BtnNew_Click(object sender, EventArgs e)
+        {
+            ClearInputs();
+            ResetInputColors();
+        }
+
+        private void BtnDisable_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                    "Quer mesmo inativar este usuário?",
+                    "Confirmação",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                ) == DialogResult.Yes)
+            {
+                if (updEmployee.Name == TxtName.Text)
+                {
+                    updEmployee.Status = false;
+                    EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+                    Epsql.Update(updEmployee);
+                    ClearInputs();
+                    ResetInputColors();
+                    QueryEmployees();
+                }
+                else
+                {
+                    MessageBox.Show("Algo deu errado, tente novamente!");
                 }
             }
         }

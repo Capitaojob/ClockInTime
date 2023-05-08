@@ -4,6 +4,12 @@
     <Compile Update="ForgotPassword.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="GeneralPayroll.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="HelpInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -14,6 +20,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="PunchInViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="PunchInViewerGeneral.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="RegisterEmployee.cs">

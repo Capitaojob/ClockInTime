@@ -31,6 +31,11 @@ namespace newTest
 
         private void QueryRoles()
         {
+            if (DesignMode)
+            {
+                return;
+            }
+
             RoleDaoPostgres psql = new RoleDaoPostgres();
             List<Role> roles = psql.ReadAll();
 

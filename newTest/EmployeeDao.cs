@@ -16,8 +16,8 @@ namespace Workers.dao
     {
         private readonly string connString;
         private const string SQL_INSERT = "INSERT INTO funcionarios (nome, email, cpf, nascimento, cargo, status) VALUES (@name, @email, @cpf, @birthday, @role, @status)";
-        private const string SQL_READALL = "SELECT * FROM funcionarios";
-        private const string SQL_SELECT = "SELECT * FROM funcionarios WHERE email = @email";
+        private const string SQL_READALL = "SELECT * FROM funcionarios WHERE status = true";
+        private const string SQL_SELECT = "SELECT * FROM funcionarios WHERE email = @email AND status = true";
         private const string SQL_LOGIN = "SELECT * FROM funcionarios WHERE email = @email AND senha = @password";
         private const string SQL_UPDATE = "UPDATE funcionarios SET nome = @name, email = @email, cpf = @cpf, nascimento = @birthday, cargo = @role, status = @status, senha = @password WHERE id = @id";
         //Will Change

@@ -2,108 +2,32 @@
 {
     public class Address
     {
-        private int _id;
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-            }
-        }
+        public int Id { get; set; }
 
-        private string _cep = "";
-        public string CEP
-        { 
-            get
-            {
-                return _cep;
-            }
-            set
-            {
-                _cep = value;
-            }
-        }
+        public string CEP { get; set; }
 
-        private string _street = "";
-        public string Street
-        {
-            get
-            {
-                return _street;
-            }
-            set
-            {
-                _street = value;
-            }
-        }
+        public string Street { get; set; }
 
-        private int _number = 0;
-        public int Number
-        {
-            get
-            {
-                return _number;
-            }
-            set
-            {
-                _number = value;
-            }
-        }
+        public int Number { get; set; }
 
-        private string _neighbourhood = "";
-        public string Neighbourhood
-        {
-            get
-            {
-                return _neighbourhood;
-            }
-            set
-            {
-                _neighbourhood = value;
-            }
-        }
+        public string Neighbourhood { get; set; }
 
-        private string _suplement = "";
-        public string Suplement
-        {
-            get
-            {
-                return _suplement;
-            }
-            set
-            {
-                _suplement = value;
-            }
-        }
+        public string Suplement { get; set; }
 
-        private string _city = "";
-        public string City
-        {
-            get
-            {
-                return _city;
-            }
-            set
-            {
-                _city = value;
-            }
-        }
+        public string City { get; set; }
 
-        private string _state = "";
-        public string State
+        public string State { get; set; }
+
+        public Address()
         {
-            get
-            {
-                return _state;
-            }
-            set
-            {
-                _state = value;
-            }
+            this.Id = 0;
+            this.CEP = "";
+            this.Street = "";
+            this.Number = 0;
+            this.Neighbourhood = "";
+            this.Suplement = "";
+            this.City = "";
+            this.State = "";
         }
     }
 }
