@@ -32,6 +32,7 @@ namespace newTest
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             PnlMainLeft = new Panel();
+            BtnManageUsers = new Button();
             BtnGeneralPayment = new Button();
             LblManagement = new Label();
             LblClockIn = new Label();
@@ -49,8 +50,11 @@ namespace newTest
             PbUser = new PictureBox();
             label1 = new Label();
             LblPath = new Label();
-            registerEmployee = new RegisterEmployee();
             PnlMainContent = new Panel();
+            punchInViewer1 = new PunchInViewer();
+            registerEmployee1 = new RegisterEmployee();
+            roleManagement1 = new RoleManagement();
+            userPayroll1 = new UserPayroll();
             punchInControl1 = new PunchInControl();
             userData1 = new UserData();
             PnlMainLeft.SuspendLayout();
@@ -64,6 +68,7 @@ namespace newTest
             // 
             PnlMainLeft.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             PnlMainLeft.BackColor = SystemColors.HotTrack;
+            PnlMainLeft.Controls.Add(BtnManageUsers);
             PnlMainLeft.Controls.Add(BtnGeneralPayment);
             PnlMainLeft.Controls.Add(LblManagement);
             PnlMainLeft.Controls.Add(LblClockIn);
@@ -78,6 +83,18 @@ namespace newTest
             PnlMainLeft.Name = "PnlMainLeft";
             PnlMainLeft.Size = new Size(221, 620);
             PnlMainLeft.TabIndex = 0;
+            // 
+            // BtnManageUsers
+            // 
+            BtnManageUsers.Cursor = Cursors.Hand;
+            BtnManageUsers.FlatStyle = FlatStyle.Flat;
+            BtnManageUsers.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnManageUsers.Location = new Point(12, 372);
+            BtnManageUsers.Name = "BtnManageUsers";
+            BtnManageUsers.Size = new Size(195, 43);
+            BtnManageUsers.TabIndex = 11;
+            BtnManageUsers.Text = "Consulta de Pontos Geral";
+            BtnManageUsers.UseVisualStyleBackColor = true;
             // 
             // BtnGeneralPayment
             // 
@@ -96,7 +113,7 @@ namespace newTest
             LblManagement.AutoSize = true;
             LblManagement.BackColor = Color.Transparent;
             LblManagement.Font = new Font("Neon 80s", 17F, FontStyle.Regular, GraphicsUnit.Point);
-            LblManagement.Location = new Point(12, 398);
+            LblManagement.Location = new Point(12, 345);
             LblManagement.Name = "LblManagement";
             LblManagement.Size = new Size(173, 24);
             LblManagement.TabIndex = 9;
@@ -118,7 +135,7 @@ namespace newTest
             LblPayment.AutoSize = true;
             LblPayment.BackColor = Color.Transparent;
             LblPayment.Font = new Font("Neon 80s", 17F, FontStyle.Regular, GraphicsUnit.Point);
-            LblPayment.Location = new Point(12, 243);
+            LblPayment.Location = new Point(12, 244);
             LblPayment.Name = "LblPayment";
             LblPayment.Size = new Size(130, 24);
             LblPayment.TabIndex = 5;
@@ -129,11 +146,11 @@ namespace newTest
             BtnSignIn.Cursor = Cursors.Hand;
             BtnSignIn.FlatStyle = FlatStyle.Flat;
             BtnSignIn.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnSignIn.Location = new Point(12, 425);
+            BtnSignIn.Location = new Point(12, 436);
             BtnSignIn.Name = "BtnSignIn";
             BtnSignIn.Size = new Size(195, 43);
             BtnSignIn.TabIndex = 7;
-            BtnSignIn.Text = "Cadastro de Funcionário";
+            BtnSignIn.Text = "Gerenciar Funcionários";
             BtnSignIn.UseVisualStyleBackColor = true;
             BtnSignIn.Click += BtnSignIn_Click;
             // 
@@ -142,12 +159,13 @@ namespace newTest
             BtnRole.Cursor = Cursors.Hand;
             BtnRole.FlatStyle = FlatStyle.Flat;
             BtnRole.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnRole.Location = new Point(12, 494);
+            BtnRole.Location = new Point(12, 501);
             BtnRole.Name = "BtnRole";
             BtnRole.Size = new Size(195, 43);
             BtnRole.TabIndex = 6;
-            BtnRole.Text = "Cadastro de Cargos";
+            BtnRole.Text = "Gerenciar Cargos";
             BtnRole.UseVisualStyleBackColor = true;
+            BtnRole.Click += BtnRole_Click;
             // 
             // BtnConference
             // 
@@ -155,24 +173,26 @@ namespace newTest
             BtnConference.Cursor = Cursors.Hand;
             BtnConference.FlatStyle = FlatStyle.Flat;
             BtnConference.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnConference.Location = new Point(12, 180);
+            BtnConference.Location = new Point(12, 174);
             BtnConference.Name = "BtnConference";
             BtnConference.Size = new Size(195, 43);
             BtnConference.TabIndex = 4;
             BtnConference.Text = "Consulta de Pontos";
             BtnConference.UseVisualStyleBackColor = false;
+            BtnConference.Click += BtnConference_Click;
             // 
             // BtnPayment
             // 
             BtnPayment.Cursor = Cursors.Hand;
             BtnPayment.FlatStyle = FlatStyle.Flat;
             BtnPayment.Font = new Font("Neon 80s", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnPayment.Location = new Point(12, 270);
+            BtnPayment.Location = new Point(12, 271);
             BtnPayment.Name = "BtnPayment";
             BtnPayment.Size = new Size(195, 43);
             BtnPayment.TabIndex = 3;
             BtnPayment.Text = "Demonstrativo de Pagamento";
             BtnPayment.UseVisualStyleBackColor = true;
+            BtnPayment.Click += BtnPayment_Click;
             // 
             // BtnClockIn
             // 
@@ -279,24 +299,54 @@ namespace newTest
             LblPath.TabIndex = 2;
             LblPath.Text = "Início > Minha Conta";
             // 
-            // registerEmployee
-            // 
-            registerEmployee.BackColor = Color.FromArgb(248, 250, 255);
-            registerEmployee.Location = new Point(0, 0);
-            registerEmployee.Name = "registerEmployee";
-            registerEmployee.Size = new Size(914, 482);
-            registerEmployee.TabIndex = 5;
-            // 
             // PnlMainContent
             // 
             PnlMainContent.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            PnlMainContent.Controls.Add(punchInViewer1);
+            PnlMainContent.Controls.Add(registerEmployee1);
+            PnlMainContent.Controls.Add(roleManagement1);
+            PnlMainContent.Controls.Add(userPayroll1);
             PnlMainContent.Controls.Add(punchInControl1);
-            PnlMainContent.Controls.Add(registerEmployee);
             PnlMainContent.Controls.Add(userData1);
             PnlMainContent.Location = new Point(262, 112);
             PnlMainContent.Name = "PnlMainContent";
             PnlMainContent.Size = new Size(914, 482);
             PnlMainContent.TabIndex = 1;
+            // 
+            // punchInViewer1
+            // 
+            punchInViewer1.BackColor = Color.FromArgb(248, 250, 255);
+            punchInViewer1.Location = new Point(0, 0);
+            punchInViewer1.Name = "punchInViewer1";
+            punchInViewer1.Size = new Size(914, 482);
+            punchInViewer1.TabIndex = 11;
+            punchInViewer1.Load += punchInViewer1_Load;
+            // 
+            // registerEmployee1
+            // 
+            registerEmployee1.BackColor = Color.FromArgb(248, 250, 255);
+            registerEmployee1.Location = new Point(0, 0);
+            registerEmployee1.Name = "registerEmployee1";
+            registerEmployee1.Size = new Size(914, 482);
+            registerEmployee1.TabIndex = 9;
+            registerEmployee1.Load += registerEmployee_Load;
+            // 
+            // roleManagement1
+            // 
+            roleManagement1.BackColor = Color.FromArgb(248, 250, 255);
+            roleManagement1.Location = new Point(0, 0);
+            roleManagement1.Name = "roleManagement1";
+            roleManagement1.Size = new Size(914, 482);
+            roleManagement1.TabIndex = 8;
+            // 
+            // userPayroll1
+            // 
+            userPayroll1.BackColor = Color.FromArgb(248, 250, 255);
+            userPayroll1.Location = new Point(0, 0);
+            userPayroll1.Name = "userPayroll1";
+            userPayroll1.Size = new Size(914, 482);
+            userPayroll1.TabIndex = 7;
+            userPayroll1.Load += userPayroll1_Load;
             // 
             // punchInControl1
             // 
@@ -309,12 +359,12 @@ namespace newTest
             // 
             // userData1
             // 
-            userData1.BackColor = SystemColors.Control;
+            userData1.BackColor = Color.FromArgb(248, 250, 255);
             userData1.Location = new Point(0, 0);
             userData1.Margin = new Padding(3, 2, 3, 2);
             userData1.Name = "userData1";
             userData1.Size = new Size(914, 482);
-            userData1.TabIndex = 5;
+            userData1.TabIndex = 10;
             userData1.Load += userData1_Load;
             // 
             // MainForm
@@ -365,9 +415,15 @@ namespace newTest
         private Button BtnClockIn;
         private Label LblManagement;
         private Button BtnGeneralPayment;
-        private RegisterEmployee registerEmployee;
+        //private RegisterEmployee registerEmployee;
         private Panel PnlMainContent;
-        private UserData userData1;
+        //private UserData userData1;
         private PunchInControl punchInControl1;
+        private Button BtnManageUsers;
+        private UserPayroll userPayroll1;
+        private RoleManagement roleManagement1;
+        private RegisterEmployee registerEmployee1;
+        private UserData userData1;
+        private PunchInViewer punchInViewer1;
     }
 }

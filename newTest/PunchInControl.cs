@@ -1,6 +1,5 @@
 ﻿using PunchIn.dao;
 using PunchIn;
-using System;
 using System.Timers;
 using Workers;
 
@@ -24,14 +23,13 @@ namespace newTest
             this.BackColor = DefaultColors.White;
             PnlRight.BackColor = DefaultColors.DarkBlue;
             BtnPunchIn.BackColor = DefaultColors.SandyBrown;
-
-            BtnPunchIn.ForeColor = DefaultColors.White;
-
+            BtnPunchIn.FlatAppearance.BorderSize = 0;
             LblLastRegisters.ForeColor = DefaultColors.WhiteGray;
+            LblWarningPonto.ForeColor = DefaultColors.WarnRed;
+            TxtLastClockIn.BackColor = DefaultColors.White;
 
             timer.Start();
         }
-
 
         public void UpdateUser(Employee User)
         {
@@ -111,7 +109,7 @@ namespace newTest
             }
             else
             {
-                MessageBox.Show("Não há mais pontos para bater!");
+                LblWarningPonto.Text = "Não há mais pontos a registrar";
                 return;
             }
 
@@ -124,30 +122,60 @@ namespace newTest
             PunchInDaoPostgres psql = new PunchInDaoPostgres();
             List<ClockIn> clockList = psql.ReadAll(User.Id);
 
-            if (clockList != null)
+            if (clockList == null || clockList.Count == 0)
             {
-                foreach (ClockIn clock in clockList)
-                {
-                    string Date = clock.Date.ToString("dd/MM/yyyy");
 
-                    if (clock.MainClockIn != null)
-                    {
-                        AddClockInLabel(Date, clock.MainClockIn.ToString());
-                    }
-                    if (clock.LunchClockOut != null)
-                    {
-                        AddClockInLabel(Date, clock.LunchClockOut.ToString());
-                    }
-                    if (clock.LunchClockIn != null)
-                    {
-                        AddClockInLabel(Date, clock.LunchClockIn.ToString());
-                    }
-                    if (clock.MainClockOut != null)
-                    {
-                        AddClockInLabel(Date, clock.MainClockOut.ToString());
-                    }
+                TxtLastClockIn.Text = "Sem pontos registrados hoje!";
+                return;
+            }
+
+            foreach (ClockIn clock in clockList)
+            {
+                string Date = clock.Date.ToString("dd/MM/yyyy");
+
+                if (clock.MainClockOut != null)
+                {
+                    AddClockInLabel(Date, clock.MainClockOut.ToString());
+                }
+                if (clock.LunchClockIn != null)
+                {
+                    AddClockInLabel(Date, clock.LunchClockIn.ToString());
+                }
+                if (clock.LunchClockOut != null)
+                {
+                    AddClockInLabel(Date, clock.LunchClockOut.ToString());
+                }
+                if (clock.MainClockIn != null)
+                {
+                    AddClockInLabel(Date, clock.MainClockIn.ToString());
                 }
             }
+
+            string lastClockIn;
+
+            if (clockList[0].MainClockOut != null)
+            {
+                lastClockIn = clockList[0].MainClockOut.ToString() + " (Saída)";
+            }
+            else if (clockList[0].LunchClockIn != null)
+            {
+                lastClockIn = clockList[0].LunchClockIn.ToString() + " (Entrada Almoço)";
+            }
+            else if (clockList[0].LunchClockOut != null)
+            {
+                lastClockIn = clockList[0].LunchClockOut.ToString() + " (Saída Almoço)";
+            }
+            else if (clockList[0].MainClockIn != null)
+            {
+                lastClockIn = clockList[0].MainClockIn.ToString() + " (Entrada)";
+            }
+            else
+            {
+                TxtLastClockIn.Text = "Sem pontos registrados hoje!";
+                return;
+            }
+
+            TxtLastClockIn.Text = clockList[0].Date.ToString("dd/MM/yyyy") + "  |  " + lastClockIn;
         }
 
         private void AddClockInLabel(string Date, string clockIn)

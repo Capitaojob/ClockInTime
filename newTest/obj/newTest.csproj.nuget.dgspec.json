@@ -40,9 +40,29 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Microsoft.Windows.Compatibility": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Npgsql": {
               "target": "Package",
-              "version": "[7.0.2, )"
+              "version": "[7.0.4, )"
+            },
+            "SharpHash": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "System.Security.Cryptography.X509Certificates": {
+              "target": "Package",
+              "version": "[4.3.2, )"
+            },
+            "iTextSharp.LGPLv2.Core": {
+              "target": "Package",
+              "version": "[3.3.5, )"
             }
           },
           "imports": [

@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace newTest
 {
@@ -25,3 +25,7 @@ namespace newTest
         }
     }
 }
+
+
+//return HashFactory.Crypto.CreateSHA2_256()
+//.ComputeString(stringToHash, Encoding.UTF8).ToString();

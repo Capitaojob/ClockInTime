@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            LblPageName = new Label();
             lblCurrentTime = new Label();
             BtnPunchIn = new Button();
             PnlRight = new Panel();
@@ -40,18 +39,11 @@
             LblMainIn = new Label();
             LblUserId = new Label();
             LblLastRegisters = new Label();
+            LblWarningPonto = new Label();
+            LblLastRegister = new Label();
+            TxtLastClockIn = new TextBox();
             PnlRight.SuspendLayout();
             SuspendLayout();
-            // 
-            // LblPageName
-            // 
-            LblPageName.AutoSize = true;
-            LblPageName.Font = new Font("Neon 80s", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            LblPageName.Location = new Point(20, 20);
-            LblPageName.Name = "LblPageName";
-            LblPageName.Size = new Size(186, 21);
-            LblPageName.TabIndex = 6;
-            LblPageName.Text = "Registro de Pontos";
             // 
             // lblCurrentTime
             // 
@@ -65,6 +57,8 @@
             // 
             // BtnPunchIn
             // 
+            BtnPunchIn.Cursor = Cursors.Hand;
+            BtnPunchIn.FlatStyle = FlatStyle.Flat;
             BtnPunchIn.Font = new Font("Neon 80s", 17F, FontStyle.Regular, GraphicsUnit.Point);
             BtnPunchIn.Location = new Point(247, 396);
             BtnPunchIn.Name = "BtnPunchIn";
@@ -171,11 +165,47 @@
             LblLastRegisters.TabIndex = 0;
             LblLastRegisters.Text = "Últimos Pontos";
             // 
+            // LblWarningPonto
+            // 
+            LblWarningPonto.AutoSize = true;
+            LblWarningPonto.Font = new Font("Neon 80s", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            LblWarningPonto.Location = new Point(205, 442);
+            LblWarningPonto.Name = "LblWarningPonto";
+            LblWarningPonto.Size = new Size(0, 19);
+            LblWarningPonto.TabIndex = 9;
+            LblWarningPonto.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // LblLastRegister
+            // 
+            LblLastRegister.AutoSize = true;
+            LblLastRegister.BackColor = Color.Transparent;
+            LblLastRegister.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            LblLastRegister.Location = new Point(189, 220);
+            LblLastRegister.Name = "LblLastRegister";
+            LblLastRegister.Size = new Size(283, 25);
+            LblLastRegister.TabIndex = 7;
+            LblLastRegister.Text = "Último Ponto Registrado:";
+            // 
+            // TxtLastClockIn
+            // 
+            TxtLastClockIn.BackColor = SystemColors.ActiveBorder;
+            TxtLastClockIn.BorderStyle = BorderStyle.None;
+            TxtLastClockIn.Font = new Font("Neon 80s", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            TxtLastClockIn.Location = new Point(21, 258);
+            TxtLastClockIn.Name = "TxtLastClockIn";
+            TxtLastClockIn.ReadOnly = true;
+            TxtLastClockIn.Size = new Size(617, 28);
+            TxtLastClockIn.TabIndex = 10;
+            TxtLastClockIn.TabStop = false;
+            TxtLastClockIn.TextAlign = HorizontalAlignment.Center;
+            // 
             // PunchInControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(LblPageName);
+            Controls.Add(TxtLastClockIn);
+            Controls.Add(LblWarningPonto);
+            Controls.Add(LblLastRegister);
             Controls.Add(lblCurrentTime);
             Controls.Add(BtnPunchIn);
             Controls.Add(PnlRight);
@@ -189,8 +219,6 @@
         }
 
         #endregion
-
-        private Label LblPageName;
         private Label lblCurrentTime;
         private Button BtnPunchIn;
         private Panel PnlRight;
@@ -202,5 +230,8 @@
         private Label LblMainIn;
         private Label LblUserId;
         private Label LblLastRegisters;
+        private Label LblWarningPonto;
+        private Label LblLastRegister;
+        private TextBox TxtLastClockIn;
     }
 }

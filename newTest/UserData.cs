@@ -1,5 +1,5 @@
-﻿using Npgsql;
-using Workers;
+﻿using Workers;
+using Workers.dao;
 
 namespace newTest
 {
@@ -14,6 +14,26 @@ namespace newTest
 
         private void UserData_Load(object sender, EventArgs e)
         {
+            this.BackColor = DefaultColors.White;
+            LblUserName.BackColor = DefaultColors.White;
+            BtnUpdatePw.BackColor = DefaultColors.SandyBrown;
+            BtnUpdatePw.FlatAppearance.BorderSize = 0;
+            PnlLeft.BackColor = DefaultColors.DarkBlue;
+
+            LblWelcome.ForeColor = DefaultColors.SandyBrown;
+            LblIntro.ForeColor = DefaultColors.Gray;
+
+            TxtCpf.BackColor = DefaultColors.InputGray;
+            TxtEmail.BackColor = DefaultColors.InputGray;
+            TxtPw.BackColor = DefaultColors.InputGray;
+            TxtRole.BackColor = DefaultColors.InputGray;
+
+            BtnChangeAc.BackColor = DefaultColors.SandyBrown;
+            BtnChangeAc.FlatAppearance.BorderSize = 0;
+
+            BtnQuit.BackColor = DefaultColors.SandyBrown;
+            BtnQuit.FlatAppearance.BorderSize = 0;
+
             UpdateData();
         }
 
@@ -31,20 +51,12 @@ namespace newTest
             SelectUserRole();
         }
 
-        async private void SelectUserRole()
+        private void SelectUserRole()
         {
-            using NpgsqlConnection conn = new("Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh");
-            conn.Open();
+            if (DesignMode) return;
 
-            NpgsqlCommand cmd = new($"SELECT nome_cargo FROM cargo JOIN funcionarios ON funcionarios.cargo = cargo.id_cargo WHERE email = '" + User.Email + "'", conn);
-            NpgsqlDataReader dr = await cmd.ExecuteReaderAsync();
-
-            if (await dr.ReadAsync())
-            {
-                TxtRole.Text = dr.GetString(0);
-            }
-
-            dr.Close();
+            EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+            TxtRole.Text = Epsql.SelectRole(User.Id);
         }
 
         private void BtnUpdatePw_Click(object sender, EventArgs e)
@@ -60,11 +72,8 @@ namespace newTest
             else
             {
                 User.Password = HashUtils.HashString(TxtPw.Text);
-                using NpgsqlConnection conn = new("Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh");
-                conn.Open();
-
-                NpgsqlCommand cmd = new($"UPDATE funcionarios SET senha = '" + User.Password + "' WHERE email = '" + User.Email + "'", conn);
-                cmd.ExecuteNonQuery();
+                EmployeeDaoPostgres Epsql = new EmployeeDaoPostgres();
+                Epsql.Update(User);
 
                 LblPwWarning.Text = "Senha alterada com sucesso!";
             }
@@ -86,6 +95,20 @@ namespace newTest
             }
 
             ImgPwEye.Refresh();
+        }
+
+        private void BtnQuit_Click(object sender, EventArgs e)
+        {
+            ParentForm.Close();
+        }
+
+        private void BtnChangeAc_Click(object sender, EventArgs e)
+        {
+            ParentForm.Hide();
+
+            loginForm login = new loginForm();
+            login.Closed += (s, args) => ParentForm.Close();
+            login.Show();
         }
     }
 }

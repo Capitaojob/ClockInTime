@@ -65,6 +65,7 @@
             // 
             LblForgotPw.ActiveLinkColor = SystemColors.HotTrack;
             LblForgotPw.AutoSize = true;
+            LblForgotPw.Cursor = Cursors.Hand;
             LblForgotPw.Font = new Font("Neon 80s", 12F, FontStyle.Regular, GraphicsUnit.Point);
             LblForgotPw.LinkColor = SystemColors.ControlDarkDark;
             LblForgotPw.Location = new Point(434, 456);

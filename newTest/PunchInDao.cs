@@ -1,29 +1,28 @@
-﻿using Npgsql;
-using System.Data;
-using Workers;
+﻿using newTest;
+using Npgsql;
 
 namespace PunchIn.dao
 {
     internal interface IPunchInDao
     {
         void Insert(ClockIn clockIn);
-        List<ClockIn> ReadAll();
+        List<ClockIn> ReadAll(int Id, bool Limit = true);
         void Update(ClockIn clockIn);
         void Delete(ClockIn clockIn);
     }
 
-    public class PunchInDaoPostgres //: IPunchInDao
+    public class PunchInDaoPostgres : IPunchInDao
     {
         private readonly string connString;
         private const string SQL_INSERT = "INSERT INTO pontos (id_funcionario, data, entrada, saida_al, entrada_al, saida) values (@idEmployee, @date, @entry, @lunchExit, @lunchEntry, @exit)";
-        private const string SQL_READALL = "SELECT * FROM pontos WHERE id_funcionario = @idEmployee ORDER BY id_ponto LIMIT 3";
+        private const string SQL_READALL = "SELECT * FROM pontos WHERE id_funcionario = @idEmployee ORDER BY data DESC"; // LIMIT 3
         private const string SQL_SELECT = "SELECT * FROM pontos WHERE data = @date AND id_funcionario = @idEmployee"; 
         private const string SQL_UPDATE = "UPDATE pontos SET id_funcionario = @idEmployee, data = @date, entrada = @entry, saida_al = @lunchExit, entrada_al= @lunchEntry, saida = @exit WHERE id_ponto = @id";
         private const string SQL_DELETE = "DELETE FROM pontos WHERE id_ponto = @id";
 
         public PunchInDaoPostgres()
         {
-            connString = "Server=localhost; Port=5432; User Id=postgres; Password=JOpe2004!; Database=tzrh";
+            connString = DbConnection.connString;
         }
 
         public void Insert(ClockIn clockIn)
@@ -78,13 +77,13 @@ namespace PunchIn.dao
             }
         }
 
-        public List<ClockIn> ReadAll(int Id)
+        public List<ClockIn> ReadAll(int Id, bool Limit = true)
         {
             List<ClockIn> clockIn = new List<ClockIn>();
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
-                using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_READALL, conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand(Limit ? SQL_READALL + " LIMIT 3" : SQL_READALL, conn))
                 {
                     cmd.Parameters.AddWithValue("@idEmployee", Id); 
 
@@ -110,15 +109,20 @@ namespace PunchIn.dao
             return clockIn;
         }
 
-        public ClockIn? SelectSpecific(int idEmployee)
+        public ClockIn? SelectSpecific(int idEmployee, DateTime? date = null)
         {
+            if (date == null)
+            {
+                date = DateTime.Now.Date;
+            }
+
             using (NpgsqlConnection conn = new NpgsqlConnection(connString))
             {
                 conn.Open();
 
                 using (NpgsqlCommand cmd = new NpgsqlCommand(SQL_SELECT, conn))
                 {
-                    cmd.Parameters.AddWithValue("@date", DateTime.Now.Date); //.ToString("yyyy-MM-dd")
+                    cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@idEmployee", idEmployee);
 
                     using (NpgsqlDataReader reader = cmd.ExecuteReader())

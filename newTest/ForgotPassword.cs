@@ -16,6 +16,9 @@ namespace newTest
         private void ForgotPassword_Load(object sender, EventArgs e)
         {
             this.BackColor = DefaultColors.DarkBlue;
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             PnlMiddle.BackColor = DefaultColors.White;
             TxtInputCode.BackColor = DefaultColors.InputGray;
             TxtWarning.BackColor = DefaultColors.White;

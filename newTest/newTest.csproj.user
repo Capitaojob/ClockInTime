@@ -10,19 +10,22 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PunchIn.cs">
+    <Compile Update="PunchInControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="PunchInControl.cs">
+    <Compile Update="PunchInViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="RegisterEmployee.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="RoleManagement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserData.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserInfo.cs">
+    <Compile Update="UserPayroll.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
