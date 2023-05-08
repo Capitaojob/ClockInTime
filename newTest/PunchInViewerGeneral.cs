@@ -37,6 +37,11 @@ namespace newTest
         // Add Employees to Combo box
         private void QueryEmployees()
         {
+            if (DesignMode)
+            {
+                return;
+            }
+
             EmployeeDaoPostgres psql = new EmployeeDaoPostgres();
             List<Employee> employees = psql.ReadAll();
 
